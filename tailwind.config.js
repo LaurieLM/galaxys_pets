@@ -8,6 +8,7 @@ export default {
     extend: {
       fontFamily: {
         sans: ['Nunito', 'sans-serif'],
+        macondo: ['Macondo', 'cursive'],
       },
     },
   },
