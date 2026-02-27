@@ -1,4 +1,7 @@
 import { Navigate, Route, Routes } from "react-router-dom";
+import Shelters from "./pages/Shelters";
+import Nutrition from "./pages/Nutrition";
+import Health from "./pages/Health";
 import Header from "./components/Header";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
@@ -11,10 +14,10 @@ export default function App() {
             
             <main className="flex-grow">
                 <Routes>
-                    <Route path="/" element={<Navigate to="/refuges" replace />} />
-                    <Route path="/refuges" element={<div>Refuges</div>} />
-                    <Route path="/health" element={<div>Santé</div>} />
-                    <Route path="/nutrition" element={<div>Nutrition</div>} />
+                    <Route path="/" element={<Navigate to="/shelters" replace />} />
+                    <Route path="/shelters" element={<Shelters />} />
+                    <Route path="/health" element={<Health />} />
+                    <Route path="/nutrition" element={<Nutrition />} />
                 </Routes>
             </main>
 
