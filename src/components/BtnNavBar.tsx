@@ -3,10 +3,9 @@ interface BtnNavbarProps {
     text: string;
     color: 'blue' | 'emerald' | 'orange';
     active?: boolean;
-    onClick?: () => void;
 }
 
-export default function BtnNavbar({ logo, text, color, active = false, onClick }: BtnNavbarProps) {
+export default function BtnNavbar({ logo, text, color, active = false }: BtnNavbarProps) {
     const activeColorClasses = {
         blue: 'text-blue-600 bg-blue-50',
         emerald: 'text-emerald-600 bg-emerald-50',
@@ -24,10 +23,8 @@ export default function BtnNavbar({ logo, text, color, active = false, onClick }
         .replace(/<\?xml[^>]*>/g, '')
 
     return (
-        <button
-            type="button"
-            onClick={onClick}
-            className={`w-1/3 m-1 flex flex-col items-center justify-center rounded-xl transition-all duration-200 ${
+        <div
+            className={`h-full flex flex-col items-center justify-center rounded-xl ${
                 active ? activeColorClasses[color] : `text-black ${hoverColorClasses[color]}`
             }`}
         >
@@ -37,6 +34,6 @@ export default function BtnNavbar({ logo, text, color, active = false, onClick }
                 dangerouslySetInnerHTML={{ __html: inlineLogo }}
             />
             <p className="text-sm font-thin">{text}</p>
-        </button>
+        </div>
     )
 }
