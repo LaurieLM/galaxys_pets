@@ -1,4 +1,4 @@
-export default function Refuges() {
+export default function Shelters() {
     return (
         <div>Refuges</div>
     )
