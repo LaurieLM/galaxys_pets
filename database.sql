@@ -3,14 +3,14 @@ USE galaxys_pets;
 
 CREATE TABLE animals (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    type VARCHAR(25) NOT NULL,
+    type VARCHAR(25) NOT NULL
 ) ENGINE=InnoDB
 DEFAULT CHARSET=utf8mb4
 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE food_types (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    name VARCHAR(50) NOT NULL,
+    name VARCHAR(100) NOT NULL UNIQUE,
     description TEXT NOT NULL
 ) ENGINE=InnoDB
 DEFAULT CHARSET=utf8mb4
@@ -18,11 +18,11 @@ COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE refuges (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    name VARCHAR(50) NOT NULL,
+    name VARCHAR(100) NOT NULL,
     city VARCHAR(25) NOT NULL,
-    adress VARCHAR(100) NOT NULL,
-    phone VARCHAR(20) NOT NULL,
-    website VARCHAR(255) NOT NULL,
+    adress VARCHAR(100),
+    phone VARCHAR(50),
+    website VARCHAR(255),
     description TEXT,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB
