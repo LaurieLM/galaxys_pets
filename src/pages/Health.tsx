@@ -1,7 +1,7 @@
 import useHealth from "../hooks/useHealth";
 
 export default function Health() {
-    const animalId = 3;
+    const animalId = 1;
     const { data, isLoading, isError, error } = useHealth(animalId);
 
     if (isLoading) return <p>Chargement...</p>;
@@ -9,11 +9,17 @@ export default function Health() {
     if (!data) return <p>Aucune information sur la santé disponible.</p>;
     return (
         <section>
-            <h2>Santé</h2>
-            <p>Type : {data.animalType}</p>
-            <p>Vermifuge : {data.dewormingFrequency}</p>
-            <p>Visite vétérinaire : {data.vetCheckFrequency}</p>
-            <p>Conseils : {data.generalAdvice}</p>
-        </section>
+                <h2 className="text-center text-[#8fd3a9] font-bold text-3xl mt-4 mb-8">Santé</h2>
+                <div className="m-4">
+                    <h3 className="font-medium text-[1.1rem] text-[#b8e3c8]">Fréquence vermifuge</h3>
+                    <p className="text-center text-slate-300 font-thin mt-4 mb-8">{data.dewormingFrequency}</p>
+
+                    <h3 className="font-medium text-[1.1rem] text-[#b8e3c8]">Fréquence visite vétérinaire</h3>
+                    <p className="text-center text-slate-300 font-thin mt-4 mb-8">{data.vetCheckFrequency}</p>
+
+                    <h3 className="font-medium text-[1.1rem] text-[#b8e3c8]">Conseils</h3>
+                    <p className="text-justify text-slate-300 font-thin mt-4 mb-8 mr-4 ml-4">{data.generalAdvice}</p>
+                </div>
+            </section>
     )
 }

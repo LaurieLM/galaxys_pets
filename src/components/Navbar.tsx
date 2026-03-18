@@ -8,7 +8,7 @@ import BtnNavbar from './BtnNavBar'
 export default function Navbar() {
 
     return (
-        <nav className="flex justify-around h-16 m-4 rounded-2xl border-spacing-1 shadow-[0px_1px_4px_0px_rgba(178,168,168,0.75)]">
+        <nav className="flex justify-around h-16 m-4 rounded-2xl border-spacing-1 shadow-[0px_1px_4px_0px_rgba(178,168,168,0.75)] bg-white">
 
             <NavLink to="/shelters" className="w-1/3 m-1 transition-all duration-200">
                 {({ isActive }) => (

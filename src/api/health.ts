@@ -1,7 +1,6 @@
 import { API_URL } from '../config';
 
 type HealthResponse = {
-        animalType: string,
         dewormingFrequency: string,
         vetCheckFrequency: string,
         generalAdvice: string
