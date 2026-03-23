@@ -2,11 +2,15 @@ import { useEffect, useRef, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import useHealth from "../hooks/useHealth";
 import getAnimals from "../api/animals";
+import useVaccines from "../hooks/useVaccines";
 
 export default function Health() {
+
+    // State pour l'animal sélectionné et l'ouverture du dropdown
     const [selectedAnimalId, setSelectedAnimalId] = useState<number>(0);
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
     const dropdownRef = useRef<HTMLDivElement | null>(null);
+
     const { 
         data: animals, 
         isLoading: isLoadingAnimals, 
@@ -21,9 +25,17 @@ export default function Health() {
         data: health,
         isLoading: isLoadingHealth,
         isError: isErrorHealth,
-        error: healthError,
+        error: healthError
     } = useHealth(selectedAnimalId);
 
+    const { 
+        data: vaccines, 
+        isLoading: isLoadingVaccines, 
+        isError: isErrorVaccines, 
+        error: vaccinesError
+    } = useVaccines(selectedAnimalId);
+
+    // Ferme le dropdown si on clique en dehors
     useEffect(() => {
         function handleClickOutside(event: MouseEvent) {
             if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
@@ -43,12 +55,13 @@ export default function Health() {
     if (isLoadingAnimals) return <p>Chargement des types d'animaux...</p>;
     if (isErrorAnimals) return <p>Erreur types d'animaux: {(animalsError as Error).message}</p>;
 
-    
     return (
         <section>
                 <h2 className="text-center text-[#8fd3a9] font-bold text-3xl mt-4 mb-8">Santé</h2>
 
                 <div className="m-4 flex justify-center">
+
+                    {/* Dropdown pour sélectionner le type d'animal */}
                     <div className="relative max-w-xs mb-[1.5rem]" ref={dropdownRef}>
                         <button
                             type="button"
@@ -94,6 +107,7 @@ export default function Health() {
                     </div>
                 </div>
 
+                {/* Affichage des recommandations de santé et des vaccins en fonction de l'animal sélectionné */}
                 {selectedAnimalId === 0 && (
                     <p className="text-center text-slate-300 font-thin mt-4 mb-8">Veuillez sélectionner un type d'animal pour voir les recommandations de santé.</p>
                 )}
@@ -114,6 +128,42 @@ export default function Health() {
                         <h3 className="font-medium text-[1.1rem] text-[#b8e3c8]">Conseils</h3>
                         <p className="text-justify text-slate-300 font-thin mt-4 mb-8 mr-4 ml-4">{health.generalAdvice}</p>
                     </div>
+                )}
+
+                {/* Affichage des vaccins recommandés */}
+                {selectedAnimalId > 0 && <h3 className="m-4 font-medium text-[1.1rem] text-[#b8e3c8]">Vaccins recommandés</h3>}
+
+                {selectedAnimalId > 0 && isLoadingVaccines && (
+                    <p className="text-center text-slate-300 font-thin mt-4 mb-8">Chargement des vaccins...</p>
+                )}
+
+                {selectedAnimalId > 0 && isErrorVaccines && (
+                    <p className="text-center text-red-400 mt-4 mb-8">Erreur vaccins : {(vaccinesError as Error).message}</p>
+                )}
+
+                {selectedAnimalId > 0 && vaccines && vaccines.length === 0 && (
+                    <p className="text-center text-slate-300 font-thin mt-4 mb-8">Aucun vaccin trouvé pour cet animal.</p>
+                )}
+
+                {selectedAnimalId > 0 && vaccines && vaccines.length > 0 && (
+                    <ul className="ml-4 mr-4 space-y-4">
+                        {vaccines.map((vaccine) => (
+                            <li key={vaccine.name} className="bg-slate-800/40 rounded p-4">
+                                <ul>
+                                    <h3 className="inline-block py-1 px-4 text-[#b8e3c8] text-[1.1rem] font-[800] bg-[#3a8d592e] text-center rounded-[0.9rem]">{vaccine.name}</h3>
+
+                                    <h4 className="font-[300] text-[1rem] text-[#b8e3c8] mt-4">Description</h4>
+                                    <li className="text-slate-300 font-thin text-justify mt-4 mb-4">{vaccine.description}</li> 
+
+                                    <h4 className="font-[300] text-[1rem] text-[#b8e3c8]">Première dose</h4>
+                                    <li className="text-slate-300 font-thin text-center mt-4 mb-4">{vaccine.firstDose}</li>
+
+                                    <h4 className="font-[300] text-[1rem] text-[#b8e3c8]">Rappels</h4>
+                                    <li className="text-slate-300 font-thin text-center mt-4">{vaccine.reminders}</li>
+                                </ul>
+                            </li>
+                        ))}
+                    </ul>
                 )}
             </section>
         );
