@@ -8,7 +8,7 @@ type VaccineResponse = {
 }
 
 export default async function getVaccinesByAnimalId(animalId: number): Promise<VaccineResponse[]> {
-    const res = await fetch(`${API_URL}/vaccines?animalId=${animalId}`);
+    const res = await fetch(`${API_URL}/animals/${animalId}/vaccines`);
     if (!res.ok) {
         throw new Error("Failed to fetch vaccines");
     }
