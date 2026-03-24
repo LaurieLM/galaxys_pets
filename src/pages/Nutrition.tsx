@@ -3,6 +3,7 @@ import { useQuery } from "@tanstack/react-query";
 import getAnimals from "../api/animals";
 import nutritionLogo from "../assets/nutrition_logo.svg?raw";
 import useFoodTypes from "../hooks/useFoodTypes";
+import useAdvantages from "../hooks/useAdvantages";
 
 export default function Nutrition() {
 
@@ -30,6 +31,13 @@ export default function Nutrition() {
         isError: isErrorFoodTypes,
         error: foodTypesError,
     } = useFoodTypes(selectedAnimalId);
+
+    const {
+        data: advantages,
+        isLoading: isLoadingAdvantages,
+        isError: isErrorAdvantages,
+        error: advantagesError,
+    } = useAdvantages(selectedAnimalId);
 
     useEffect(() => {
         function handleClickOutside(event: MouseEvent) {
@@ -137,6 +145,24 @@ export default function Nutrition() {
 
                                 <h4 className="text-[#d4a07d] font-[300] text-[1rem] mt-4">Description</h4>
                                 <li className="text-slate-300 font-thin text-justify mt-4 mb-4">{foodType.description}</li>
+
+                                {isLoadingAdvantages && <p className="text-center text-slate-300 font-thin mt-4 mb-8">Chargement des avantages...</p>}
+                                
+                                {isErrorAdvantages && <p className="text-center text-red-400 mt-4 mb-8">Erreur avantages: {(advantagesError as Error).message}</p>}
+                                
+                                {advantages && advantages.length === 0 && (
+                                    <p className="text-center text-slate-300 font-thin mt-4 mb-8">Aucun avantage trouvé pour ce type de nutrition.</p>
+                                )}
+
+                                {/* Affichage des avantages pour le type de nutrition */}
+                                <h4>Avantages</h4>
+                                {advantages && advantages.length > 0 && (
+                                    <ul>
+                                        {advantages.map((advantage) => (
+                                            <li key={advantage.label}>{advantage.label}</li>
+                                        ))}
+                                    </ul>
+                                )}
                             </ul>
                         </li>
                     ))}
