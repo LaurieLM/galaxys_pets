@@ -1,11 +1,16 @@
 import { useEffect, useRef, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import getAnimals from "../api/animals";
+import nutritionLogo from "../assets/nutrition_logo.svg?raw";
 
 export default function Nutrition() {
+    // State pour gérer l'animal sélectionné et l'ouverture du dropdown
     const [selectedAnimalId, setSelectedAnimalId] = useState<number>(0);
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
     const dropdownRef = useRef<HTMLDivElement | null>(null);
+    const inlineNutritionLogo = nutritionLogo
+        .replace('<svg', '<svg width="48" height="48" style="display:block"')
+        .replace(/<\?xml[^>]*>/g, '');
 
     const {
         data: animals,
@@ -39,9 +44,15 @@ export default function Nutrition() {
     return (
         <section>
             <h2 className="mt-4 mb-8 flex items-center justify-center gap-3 text-center text-3xl font-bold text-[#d89262]">
+                <span
+                    aria-hidden="true"
+                    className="inline-flex h-12 w-12 items-center justify-center"
+                    dangerouslySetInnerHTML={{ __html: inlineNutritionLogo }}
+                />
                 Nutrition
             </h2>
 
+            {/* Dropdown pour sélectionner le type d'animal */}
             <div className="m-4 flex justify-center">
                 <div className="relative max-w-xs mb-[1.5rem]" ref={dropdownRef}>
                     <button
@@ -88,6 +99,7 @@ export default function Nutrition() {
                 </div>
             </div>
 
+            {/* Affichage des recommandations de nutrition pour l'animal sélectionné */}
             {selectedAnimalId === 0 && (
                 <p className="text-center text-slate-300 font-thin mt-4 mb-8">
                     Veuillez sélectionner un type d'animal pour voir les recommandations de nutrition.
