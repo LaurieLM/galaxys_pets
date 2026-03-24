@@ -4,6 +4,7 @@ import getAnimals from "../api/animals";
 import nutritionLogo from "../assets/nutrition_logo.svg?raw";
 import useFoodTypes from "../hooks/useFoodTypes";
 import useAdvantages from "../hooks/useAdvantages";
+import useDisadvantages from "../hooks/useDisadvantages";
 
 export default function Nutrition() {
 
@@ -39,6 +40,13 @@ export default function Nutrition() {
         error: advantagesError,
     } = useAdvantages(selectedAnimalId);
 
+    const {
+        data: disadvantages,
+        isLoading: isLoadingDisadvantages,
+        isError: isErrorDisadvantages,
+        error: disadvantagesError,
+    } = useDisadvantages(selectedAnimalId);
+
     useEffect(() => {
         function handleClickOutside(event: MouseEvent) {
             if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
@@ -53,8 +61,10 @@ export default function Nutrition() {
         };
     }, []);
 
+    // Récupérer l'animal sélectionné à partir de la liste des animaux
     const selectedAnimal = animals?.find((animal) => animal.id === selectedAnimalId);
 
+    // Gestion des états de chargement et d'erreur pour les types d'animaux
     if (isLoadingAnimals) return <p>Chargement des types d'animaux...</p>;
     if (isErrorAnimals) return <p>Erreur types d'animaux: {(animalsError as Error).message}</p>;
 
@@ -128,6 +138,7 @@ export default function Nutrition() {
                 <h3 className="m-4 flex items-center justify-center gap-3 text-center font-black text-[1.3rem] text-[#ca814e]">Types de nutrition</h3>
             )}
 
+            {/* Gestion des états de chargement et d'erreur */}
             {selectedAnimalId > 0 && isLoadingFoodTypes && <p className="text-center text-slate-300 font-thin mt-4 mb-8">Chargement des types de nutrition...</p>}
             
             {selectedAnimalId > 0 && isErrorFoodTypes && <p className="text-center text-red-400 mt-4 mb-8">Erreur types de nutrition: {(foodTypesError as Error).message}</p>}
@@ -146,6 +157,7 @@ export default function Nutrition() {
                                 <h4 className="text-[#d4a07d] font-[300] text-[1rem] mt-4">Description</h4>
                                 <li className="text-slate-300 font-thin text-justify mt-4 mb-4">{foodType.description}</li>
 
+                                {/* Gestion des états de chargement et d'erreur pour les avantages */}
                                 {isLoadingAdvantages && <p className="text-center text-slate-300 font-thin mt-4 mb-8">Chargement des avantages...</p>}
                                 
                                 {isErrorAdvantages && <p className="text-center text-red-400 mt-4 mb-8">Erreur avantages: {(advantagesError as Error).message}</p>}
@@ -154,12 +166,31 @@ export default function Nutrition() {
                                     <p className="text-center text-slate-300 font-thin mt-4 mb-8">Aucun avantage trouvé pour ce type de nutrition.</p>
                                 )}
 
-                                {/* Affichage des avantages pour le type de nutrition */}
+                                {/* Affichage des avantages */}
                                 <h4>Avantages</h4>
                                 {advantages && advantages.length > 0 && (
                                     <ul>
                                         {advantages.map((advantage) => (
                                             <li key={advantage.label}>{advantage.label}</li>
+                                        ))}
+                                    </ul>
+                                )}
+
+                                {/* Gestion des états de chargement et d'erreur pour les inconvénients */}
+                                {isLoadingDisadvantages && <p className="text-center text-slate-300 font-thin mt-4 mb-8">Chargement des inconvénients...</p>}
+
+                                {isErrorDisadvantages && <p className="text-center text-red-400 mt-4 mb-8">Erreur inconvénients: {(disadvantagesError as Error).message}</p>}
+
+                                {disadvantages && disadvantages.length === 0 && (
+                                    <p className="text-center text-slate-300 font-thin mt-4 mb-8">Aucun inconvénient trouvé pour ce type de nutrition.</p>
+                                )}
+
+                                {/* Affichage des inconvénients */}
+                                <h4>Inconvénients</h4>
+                                {disadvantages && disadvantages.length > 0 && (
+                                    <ul>
+                                        {disadvantages.map((disadvantage) => (
+                                            <li key={disadvantage.label}>{disadvantage.label}</li>
                                         ))}
                                     </ul>
                                 )}
