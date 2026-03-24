@@ -6,7 +6,7 @@ type FoodTypeResponse = {
 }
 
 export default async function getFoodTypesByAnimalId(animalId: number): Promise<FoodTypeResponse[]> {
-    const res = await fetch(`${API_URL}/animals/${animalId}/food-types`);
+    const res = await fetch(`${API_URL}/animals/${animalId}/foodtypes`);
     if (!res.ok) {
         throw new Error("Failed to fetch food types");
     }
