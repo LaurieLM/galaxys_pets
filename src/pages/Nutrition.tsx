@@ -52,7 +52,7 @@ export default function Nutrition() {
 
     return (
         <section>
-            <h2 className="mt-4 mb-8 flex items-center justify-center gap-3 text-center text-3xl font-bold text-[#b858158f]">
+            <h2 className="mt-4 mb-8 flex items-center justify-center gap-3 text-center text-3xl font-bold text-[#ca814e]">
                 <span
                     aria-hidden="true"
                     className="inline-flex h-12 w-12 items-center justify-center"
@@ -117,7 +117,7 @@ export default function Nutrition() {
 
             {/* Affichage des types de nutrition pour l'animal sélectionné */}
             {selectedAnimalId > 0 && (
-                <h3 className="m-4 flex items-center justify-center gap-3 text-center font-black text-[1.3rem] text-[#b858158f]">Types de nutrition</h3>
+                <h3 className="m-4 flex items-center justify-center gap-3 text-center font-black text-[1.3rem] text-[#ca814e]">Types de nutrition</h3>
             )}
 
             {selectedAnimalId > 0 && isLoadingFoodTypes && <p className="text-center text-slate-300 font-thin mt-4 mb-8">Chargement des types de nutrition...</p>}
@@ -133,7 +133,7 @@ export default function Nutrition() {
                     {foodTypes.map((foodType) => (
                         <li key={foodType.name} className="bg-slate-800/40 rounded p-4">
                             <ul>
-                                <h3 className="inline-block py-1 px-4 bg-[#87462938] text-center rounded-[0.9rem] text-[#f1863c7d] text-[1.1rem] font-[800] ">{foodType.name}</h3>
+                                <h3 className="inline-block py-1 px-4 bg-[#87462938] text-center rounded-[0.9rem] text-[#ca814e] text-[1.1rem] font-[800] ">{foodType.name}</h3>
 
                                 <h4 className="text-[#d4a07d] font-[300] text-[1rem] mt-4">Description</h4>
                                 <li className="text-slate-300 font-thin text-justify mt-4 mb-4">{foodType.description}</li>
