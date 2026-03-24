@@ -2,8 +2,10 @@ import { useEffect, useRef, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import getAnimals from "../api/animals";
 import nutritionLogo from "../assets/nutrition_logo.svg?raw";
+import useFoodTypes from "../hooks/useFoodTypes";
 
 export default function Nutrition() {
+
     // State pour gérer l'animal sélectionné et l'ouverture du dropdown
     const [selectedAnimalId, setSelectedAnimalId] = useState<number>(0);
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
@@ -21,6 +23,13 @@ export default function Nutrition() {
         queryKey: ["animals"],
         queryFn: getAnimals,
     });
+
+    const {
+        data: foodTypes,
+        isLoading: isLoadingFoodTypes,
+        isError: isErrorFoodTypes,
+        error: foodTypesError,
+    } = useFoodTypes(selectedAnimalId);
 
     useEffect(() => {
         function handleClickOutside(event: MouseEvent) {
@@ -43,7 +52,7 @@ export default function Nutrition() {
 
     return (
         <section>
-            <h2 className="mt-4 mb-8 flex items-center justify-center gap-3 text-center text-3xl font-bold text-[#d89262]">
+            <h2 className="mt-4 mb-8 flex items-center justify-center gap-3 text-center text-3xl font-bold text-[#b858158f]">
                 <span
                     aria-hidden="true"
                     className="inline-flex h-12 w-12 items-center justify-center"
@@ -105,6 +114,34 @@ export default function Nutrition() {
                     Veuillez sélectionner un type d'animal pour voir les recommandations de nutrition.
                 </p>
             )}
+
+            {/* Affichage des types de nutrition pour l'animal sélectionné */}
+            {selectedAnimalId > 0 && (
+                <h3 className="m-4 flex items-center justify-center gap-3 text-center font-black text-[1.3rem] text-[#b858158f]">Types de nutrition</h3>
+            )}
+
+            {selectedAnimalId > 0 && isLoadingFoodTypes && <p className="text-center text-slate-300 font-thin mt-4 mb-8">Chargement des types de nutrition...</p>}
+            
+            {selectedAnimalId > 0 && isErrorFoodTypes && <p className="text-center text-red-400 mt-4 mb-8">Erreur types de nutrition: {(foodTypesError as Error).message}</p>}
+            
+            {selectedAnimalId > 0 &&foodTypes && foodTypes.length === 0 && (
+                <p className="text-center text-slate-300 font-thin mt-4 mb-8">Aucun type de nutrition trouvé pour cet animal.</p>
+            )}
+
+            {selectedAnimalId > 0 && foodTypes && foodTypes.length > 0 && (
+                <ul className="ml-4 mr-4 space-y-4">
+                    {foodTypes.map((foodType) => (
+                        <li key={foodType.name} className="bg-slate-800/40 rounded p-4">
+                            <ul>
+                                <h3 className="inline-block py-1 px-4 bg-[#87462938] text-center rounded-[0.9rem] text-[#f1863c7d] text-[1.1rem] font-[800] ">{foodType.name}</h3>
+
+                                <h4 className="text-[#d4a07d] font-[300] text-[1rem] mt-4">Description</h4>
+                                <li className="text-slate-300 font-thin text-justify mt-4 mb-4">{foodType.description}</li>
+                            </ul>
+                        </li>
+                    ))}
+                </ul>
+            )}
         </section>
-    )
+    );
 }
