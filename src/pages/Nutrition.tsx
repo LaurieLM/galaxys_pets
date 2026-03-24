@@ -166,16 +166,6 @@ export default function Nutrition() {
                                     <p className="text-center text-slate-300 font-thin mt-4 mb-8">Aucun avantage trouvé pour ce type de nutrition.</p>
                                 )}
 
-                                {/* Affichage des avantages */}
-                                <h4>Avantages</h4>
-                                {advantages && advantages.length > 0 && (
-                                    <ul>
-                                        {advantages.map((advantage) => (
-                                            <li key={advantage.label}>{advantage.label}</li>
-                                        ))}
-                                    </ul>
-                                )}
-
                                 {/* Gestion des états de chargement et d'erreur pour les inconvénients */}
                                 {isLoadingDisadvantages && <p className="text-center text-slate-300 font-thin mt-4 mb-8">Chargement des inconvénients...</p>}
 
@@ -185,15 +175,30 @@ export default function Nutrition() {
                                     <p className="text-center text-slate-300 font-thin mt-4 mb-8">Aucun inconvénient trouvé pour ce type de nutrition.</p>
                                 )}
 
-                                {/* Affichage des inconvénients */}
-                                <h4>Inconvénients</h4>
-                                {disadvantages && disadvantages.length > 0 && (
-                                    <ul>
-                                        {disadvantages.map((disadvantage) => (
-                                            <li key={disadvantage.label}>{disadvantage.label}</li>
-                                        ))}
-                                    </ul>
-                                )}
+                                {/* Affichage des avantages et inconvénients */}
+                                <div className="flex justify-around text-[#ca814e] text-[1.1rem] font-[800] mb-4 mt-8">
+                                    <h4>Avantages</h4> 
+                                    <h4>Inconvénients</h4>
+                                </div>
+
+                                <div className="flex justify-around">
+                                    {advantages && advantages.length > 0 && (
+                                        <ul>
+                                            {advantages.map((advantage) => (
+                                                <li key={advantage.label}>{advantage.label}</li>
+                                            ))}
+                                        </ul>
+                                    )}
+
+                                    {disadvantages && disadvantages.length > 0 && (
+                                        <ul>
+                                            {disadvantages.map((disadvantage) => (
+                                                <li key={disadvantage.label}>{disadvantage.label}</li>
+                                            ))}
+                                        </ul>
+                                    )}
+                                </div>
+
                             </ul>
                         </li>
                     ))}
