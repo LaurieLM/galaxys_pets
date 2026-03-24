@@ -4,7 +4,9 @@ import useHealth from "../hooks/useHealth";
 import getAnimals from "../api/animals";
 import useVaccines from "../hooks/useVaccines";
 import useDiseases from "../hooks/useDiseases";
-import diseases from "../api/diseases";
+import healthSectionLogo from "../assets/health_section_logo.svg";
+import vaccineLogo from "../assets/vaccine_logo.svg";
+import diseaseLogo from "../assets/disease_logo.svg";
 
 export default function Health() {
 
@@ -66,7 +68,10 @@ export default function Health() {
 
     return (
         <section>
-                <h2 className="text-center text-[#8fd3a9] font-bold text-3xl mt-4 mb-8">Santé</h2>
+                <h2 className="mt-4 mb-8 flex items-center justify-center gap-3 text-center text-3xl font-bold text-[#8fd3a9]">
+                    <img src={healthSectionLogo} alt="Icône santé" className="h-12 w-12" />
+                    Santé
+                </h2>
 
                 <div className="m-4 flex justify-center">
 
@@ -140,7 +145,12 @@ export default function Health() {
                 )}
 
                 {/* Affichage des vaccins recommandés */}
-                {selectedAnimalId > 0 && <h3 className="m-4 font-black text-[1.3rem] text-[#b8e3c8] text-center">Vaccins recommandés</h3>}
+                {selectedAnimalId > 0 && (
+                    <h3 className="m-4 flex items-center justify-center gap-3 text-center font-black text-[1.3rem] text-[#b8e3c8]">
+                        <img src={vaccineLogo} alt="Icône vaccin" className="h-12 w-12" />
+                        Vaccins recommandés
+                    </h3>
+                )}
 
                 {selectedAnimalId > 0 && isLoadingVaccines && (
                     <p className="text-center text-slate-300 font-thin mt-4 mb-8">Chargement des vaccins...</p>
@@ -176,7 +186,12 @@ export default function Health() {
                 )}
 
                 {/* Affichage des maladies courantes */}
-                {selectedAnimalId > 0 && <h3 className="m-4 font-black text-[1.3rem] text-[#b8e3c8] text-center">Maladies courantes</h3>}
+                {selectedAnimalId > 0 && (
+                    <h3 className="m-4 flex items-center justify-center gap-3 text-center font-black text-[1.3rem] text-[#b8e3c8]">
+                        <img src={diseaseLogo} alt="Icône maladies" className="h-12 w-12" />
+                        Maladies courantes
+                    </h3>
+                )}
 
                 {selectedAnimalId > 0 && isLoadingDiseases && (
                     <p className="text-center text-slate-300 font-thin mt-4 mb-8">Chargement des maladies...</p>
