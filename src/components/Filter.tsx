@@ -39,12 +39,12 @@ export default function Filter({
     const selectedOption = options.find((option) => option.value === selectedValue);
 
     return (
-        <div className="mt-2 flex flex-col items-center justify-center">
+        <div className="mt-2  flex flex-col items-center justify-center">
             <div className="relative mb-[1.5rem] max-w-xs" ref={dropdownRef}>
                 <label className="mb-2 block text-sm font-semibold text-slate-200">{label}</label>
                 <button
                     type="button"
-                    className="flex h-[2.5rem] w-[16rem] items-center justify-between rounded-lg border border-slate-500 bg-[#4b5565] pl-8 pr-4 text-center text-white shadow-sm"
+                    className="flex h-[2.5rem] w-[10rem] items-center justify-between rounded-lg border border-slate-500 bg-[#4b5565] pl-8 pr-4 text-center text-white shadow-sm"
                     onClick={() => setIsDropdownOpen((current) => !current)}
                 >
                     <span className="truncate">

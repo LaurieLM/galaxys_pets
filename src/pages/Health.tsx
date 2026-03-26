@@ -20,23 +20,26 @@ export default function Health() {
                 Santé
             </h2>
 
-            <Filter
-                label="Filtrer par vaccins"
-                options={[
-                    { value: "vaccine", label: "Vaccins" },
-                ]}
-                selectedValue="vaccine"
-                onChange={(value) => console.log(value)}
-            />
+            {/* Filtres pour les vaccins et les maladies */}
+            <div className="flex justify-around">
+                <Filter
+                    label="Filtrer par vaccins"
+                    options={[
+                        { value: "vaccine", label: "Vaccins" },
+                    ]}
+                    selectedValue="vaccine"
+                    onChange={(value) => console.log(value)}
+                />
 
-            <Filter
-                label="Filtrer par maladies"
-                options={[
-                    { value: "disease", label: "Maladies" },
-                ]}
-                selectedValue="disease"
-                onChange={(value) => console.log(value)}
-            />
+                <Filter
+                    label="Filtrer par maladies"
+                    options={[
+                        { value: "disease", label: "Maladies" },
+                    ]}
+                    selectedValue="disease"
+                    onChange={(value) => console.log(value)}
+                />
+            </div>
 
 
             {selectedAnimalId === 0 && (
