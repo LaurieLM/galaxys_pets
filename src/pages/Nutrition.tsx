@@ -1,6 +1,8 @@
 import { useEffect, useRef, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import getAnimals from "../api/animals";
+import advantagesLogo from "../assets/advantages_logo.svg?raw";
+import disadvantagesLogo from "../assets/disadvantages_logo.svg?raw";
 import nutritionLogo from "../assets/nutrition_logo.svg?raw";
 import useFoodTypes from "../hooks/useFoodTypes";
 import useAdvantages from "../hooks/useAdvantages";
@@ -12,9 +14,20 @@ export default function Nutrition() {
     const [selectedAnimalId, setSelectedAnimalId] = useState<number>(0);
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
     const dropdownRef = useRef<HTMLDivElement | null>(null);
+
+    // Logo 
     const inlineNutritionLogo = nutritionLogo
         .replace('<svg', '<svg width="48" height="48" style="display:block"')
         .replace(/<\?xml[^>]*>/g, '');
+
+    const inlineAdvantagesLogo = advantagesLogo
+        .replace('<svg', '<svg width="18" height="36" style="display:block"')
+        .replace(/<\?xml[^>]*>/g, '');
+
+    const inlineDisadvantagesLogo = disadvantagesLogo
+        .replace('<svg', '<svg width="18" height="36" style="display:block"')
+        .replace(/<\?xml[^>]*>/g, '');
+        
 
     const {
         data: animals,
@@ -177,8 +190,20 @@ export default function Nutrition() {
 
                                 {/* Affichage des avantages et inconvénients */}
                                 <div className="flex justify-around text-[#ca814e] text-[1.1rem] font-[800] mb-4 mt-8">
-                                    <h4>Avantages</h4> 
-                                    <h4>Inconvénients</h4>
+                                    <h4 aria-label="Avantages" className="flex items-center text-emerald-400">
+                                        <span
+                                            aria-hidden="true"
+                                            className="inline-flex items-center justify-center"
+                                            dangerouslySetInnerHTML={{ __html: inlineAdvantagesLogo }}
+                                        />
+                                    </h4>
+                                    <h4 aria-label="Inconvénients" className="flex items-center text-red-400">
+                                        <span
+                                            aria-hidden="true"
+                                            className="inline-flex items-center justify-center"
+                                            dangerouslySetInnerHTML={{ __html: inlineDisadvantagesLogo }}
+                                        />
+                                    </h4>
                                 </div>
 
                                 <div className="flex justify-around">
