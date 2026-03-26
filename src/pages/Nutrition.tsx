@@ -4,20 +4,14 @@ import advantagesLogo from "../assets/advantages_logo_green.svg";
 import disadvantagesLogo from "../assets/disadvantages_logo_red.svg";
 import nutritionLogo from "../assets/nutrition_logo_colored.svg";
 import dangerousFoodLogo from "../assets/dangerous_food_logo.svg";
-import useFoodTypes from "../hooks/useFoodTypes";
 import useAdvantages from "../hooks/useAdvantages";
 import useDisadvantages from "../hooks/useDisadvantages";
 import useDangerousFood from "../hooks/useDangerousFood";
+import FoodTypeInfo from "../components/FoodTypeInfo";
 
 export default function Nutrition() {
+    // State pour l'animal sélectionné et l'ouverture du dropdown
     const [selectedAnimalId, setSelectedAnimalId] = useState<number>(0);
-
-    const {
-        data: foodTypes,
-        isLoading: isLoadingFoodTypes,
-        isError: isErrorFoodTypes,
-        error: foodTypesError,
-    } = useFoodTypes(selectedAnimalId);
 
     const {
         data: advantages,
@@ -56,29 +50,8 @@ export default function Nutrition() {
                 </p>
             )}
 
-            {/* Affichage des types de nutrition pour l'animal sélectionné */}
-            {selectedAnimalId > 0 && (
-                <h3 className="m-4 flex items-center justify-center gap-3 text-center font-black text-[1.3rem] text-[#ca814e]">Types de nutrition</h3>
-            )}
-
-            {/* Gestion des états de chargement et d'erreur */}
-            {selectedAnimalId > 0 && isLoadingFoodTypes && <p className="text-center font-thin mt-4 mb-8">Chargement des types de nutrition...</p>}
-            
-            {selectedAnimalId > 0 && isErrorFoodTypes && <p className="text-center text-red-400 mt-4 mb-8">Erreur types de nutrition: {(foodTypesError as Error).message}</p>}
-            
-            {selectedAnimalId > 0 &&foodTypes && foodTypes.length === 0 && (
-                <p className="text-center  font-thin mt-4 mb-8">Aucun type de nutrition trouvé pour cet animal.</p>
-            )}
-
-            {selectedAnimalId > 0 && foodTypes && foodTypes.length > 0 && (
-                <ul className="ml-4 mr-4 space-y-4">
-                    {foodTypes.map((foodType) => (
-                        <li key={foodType.name} className="bg-slate-800/40 rounded p-4">
-                            <ul>
-                                <h3 className="inline-block py-1 px-4 bg-[#87462938] text-center rounded-[0.9rem] text-[#ca814e] text-[1.1rem] font-[800] ">{foodType.name}</h3>
-
-                                <h4 className="text-[#d4a07d] font-[300] text-[1rem] mt-4">Description</h4>
-                                <li className="font-thin text-justify mt-4 mb-4">{foodType.description}</li>
+            {/* Affichage des types de nutrition */}
+            <FoodTypeInfo selectedAnimalId={selectedAnimalId} />
 
                                 {/* Gestion des états de chargement et d'erreur pour les avantages */}
                                 {isLoadingAdvantages && <p className="text-center text-slate-300 font-thin mt-4 mb-8">Chargement des avantages...</p>}
