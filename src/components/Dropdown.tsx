@@ -45,7 +45,7 @@ export default function Dropdown({ selectedAnimalId, setSelectedAnimalId }: Drop
 
     return (
         // Dropdown pour sélectionner le type d'animal
-        <div className="m-[1.5rem] flex flex-col justify-center items-center">
+        <div className="mt-2 flex flex-col justify-center items-center">
             <div className="relative max-w-xs mb-[1.5rem]" ref={dropdownRef}>
                 <button
                     type="button"
