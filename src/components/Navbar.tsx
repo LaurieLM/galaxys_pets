@@ -1,7 +1,7 @@
 import { NavLink } from 'react-router-dom'
-import sheltersLogo from '../assets/shelters_logo.svg?raw'
-import healthLogo from '../assets/health_logo.svg?raw'
-import nutritionLogo from '../assets/nutrition_logo.svg?raw'
+import sheltersLogo from '../assets/shelters_logo.svg'
+import healthLogo from '../assets/health_logo.svg'
+import nutritionLogo from '../assets/nutrition_logo.svg'
 import BtnNavbar from './BtnNavBar'
 
 
