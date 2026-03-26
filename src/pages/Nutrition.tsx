@@ -82,7 +82,7 @@ export default function Nutrition() {
     if (isErrorAnimals) return <p>Erreur types d'animaux: {(animalsError as Error).message}</p>;
 
     return (
-        <section>
+        <section className="text-slate-300 ">
             <h2 className="mt-4 mb-8 flex items-center justify-center gap-3 text-center text-3xl font-bold text-[#ca814e]">
                 <span
                     aria-hidden="true"
@@ -152,12 +152,12 @@ export default function Nutrition() {
             )}
 
             {/* Gestion des états de chargement et d'erreur */}
-            {selectedAnimalId > 0 && isLoadingFoodTypes && <p className="text-center text-slate-300 font-thin mt-4 mb-8">Chargement des types de nutrition...</p>}
+            {selectedAnimalId > 0 && isLoadingFoodTypes && <p className="text-center font-thin mt-4 mb-8">Chargement des types de nutrition...</p>}
             
             {selectedAnimalId > 0 && isErrorFoodTypes && <p className="text-center text-red-400 mt-4 mb-8">Erreur types de nutrition: {(foodTypesError as Error).message}</p>}
             
             {selectedAnimalId > 0 &&foodTypes && foodTypes.length === 0 && (
-                <p className="text-center text-slate-300 font-thin mt-4 mb-8">Aucun type de nutrition trouvé pour cet animal.</p>
+                <p className="text-center  font-thin mt-4 mb-8">Aucun type de nutrition trouvé pour cet animal.</p>
             )}
 
             {selectedAnimalId > 0 && foodTypes && foodTypes.length > 0 && (
@@ -168,7 +168,7 @@ export default function Nutrition() {
                                 <h3 className="inline-block py-1 px-4 bg-[#87462938] text-center rounded-[0.9rem] text-[#ca814e] text-[1.1rem] font-[800] ">{foodType.name}</h3>
 
                                 <h4 className="text-[#d4a07d] font-[300] text-[1rem] mt-4">Description</h4>
-                                <li className="text-slate-300 font-thin text-justify mt-4 mb-4">{foodType.description}</li>
+                                <li className="font-thin text-justify mt-4 mb-4">{foodType.description}</li>
 
                                 {/* Gestion des états de chargement et d'erreur pour les avantages */}
                                 {isLoadingAdvantages && <p className="text-center text-slate-300 font-thin mt-4 mb-8">Chargement des avantages...</p>}
@@ -180,12 +180,12 @@ export default function Nutrition() {
                                 )}
 
                                 {/* Gestion des états de chargement et d'erreur pour les inconvénients */}
-                                {isLoadingDisadvantages && <p className="text-center text-slate-300 font-thin mt-4 mb-8">Chargement des inconvénients...</p>}
+                                {isLoadingDisadvantages && <p className="text-center font-thin mt-4 mb-8">Chargement des inconvénients...</p>}
 
                                 {isErrorDisadvantages && <p className="text-center text-red-400 mt-4 mb-8">Erreur inconvénients: {(disadvantagesError as Error).message}</p>}
 
                                 {disadvantages && disadvantages.length === 0 && (
-                                    <p className="text-center text-slate-300 font-thin mt-4 mb-8">Aucun inconvénient trouvé pour ce type de nutrition.</p>
+                                    <p className="text-center font-thin mt-4 mb-8">Aucun inconvénient trouvé pour ce type de nutrition.</p>
                                 )}
 
                                 {/* Affichage des avantages et inconvénients */}
@@ -206,19 +206,27 @@ export default function Nutrition() {
                                     </h4>
                                 </div>
 
+                                {/* Avantages */}
                                 <div className="flex justify-around">
                                     {advantages && advantages.length > 0 && (
-                                        <ul>
+                                        <ul className="pr-4">
                                             {advantages.map((advantage) => (
-                                                <li key={advantage.label}>{advantage.label}</li>
+                                                <li key={advantage.label} className="mb-2 flex items-center gap-2">
+                                                    <span className="inline-block h-[0.3rem] w-[0.3rem] rounded-full bg-gray-400 flex-shrink-0" />
+                                                    {advantage.label}
+                                                </li>
                                             ))}
                                         </ul>
                                     )}
 
+                                    {/* Inconvénients */}
                                     {disadvantages && disadvantages.length > 0 && (
                                         <ul>
                                             {disadvantages.map((disadvantage) => (
-                                                <li key={disadvantage.label}>{disadvantage.label}</li>
+                                                <li key={disadvantage.label} className="mb-2 flex items-center gap-2">
+                                                    <span className="inline-block h-[0.3rem] w-[0.3rem] rounded-full bg-gray-400 flex-shrink-0" />
+                                                    {disadvantage.label}
+                                                </li>
                                             ))}
                                         </ul>
                                     )}
