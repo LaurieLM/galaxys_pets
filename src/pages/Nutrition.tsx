@@ -1,6 +1,8 @@
 import { useEffect, useRef, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import getAnimals from "../api/animals";
+import advantagesLogo from "../assets/advantages_logo.svg?raw";
+import disadvantagesLogo from "../assets/disadvantages_logo.svg?raw";
 import nutritionLogo from "../assets/nutrition_logo.svg?raw";
 import useFoodTypes from "../hooks/useFoodTypes";
 import useAdvantages from "../hooks/useAdvantages";
@@ -12,9 +14,20 @@ export default function Nutrition() {
     const [selectedAnimalId, setSelectedAnimalId] = useState<number>(0);
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
     const dropdownRef = useRef<HTMLDivElement | null>(null);
+
+    // Logo 
     const inlineNutritionLogo = nutritionLogo
         .replace('<svg', '<svg width="48" height="48" style="display:block"')
         .replace(/<\?xml[^>]*>/g, '');
+
+    const inlineAdvantagesLogo = advantagesLogo
+        .replace('<svg', '<svg width="18" height="36" style="display:block"')
+        .replace(/<\?xml[^>]*>/g, '');
+
+    const inlineDisadvantagesLogo = disadvantagesLogo
+        .replace('<svg', '<svg width="18" height="36" style="display:block"')
+        .replace(/<\?xml[^>]*>/g, '');
+        
 
     const {
         data: animals,
@@ -69,7 +82,7 @@ export default function Nutrition() {
     if (isErrorAnimals) return <p>Erreur types d'animaux: {(animalsError as Error).message}</p>;
 
     return (
-        <section>
+        <section className="text-slate-300 ">
             <h2 className="mt-4 mb-8 flex items-center justify-center gap-3 text-center text-3xl font-bold text-[#ca814e]">
                 <span
                     aria-hidden="true"
@@ -139,12 +152,12 @@ export default function Nutrition() {
             )}
 
             {/* Gestion des états de chargement et d'erreur */}
-            {selectedAnimalId > 0 && isLoadingFoodTypes && <p className="text-center text-slate-300 font-thin mt-4 mb-8">Chargement des types de nutrition...</p>}
+            {selectedAnimalId > 0 && isLoadingFoodTypes && <p className="text-center font-thin mt-4 mb-8">Chargement des types de nutrition...</p>}
             
             {selectedAnimalId > 0 && isErrorFoodTypes && <p className="text-center text-red-400 mt-4 mb-8">Erreur types de nutrition: {(foodTypesError as Error).message}</p>}
             
             {selectedAnimalId > 0 &&foodTypes && foodTypes.length === 0 && (
-                <p className="text-center text-slate-300 font-thin mt-4 mb-8">Aucun type de nutrition trouvé pour cet animal.</p>
+                <p className="text-center  font-thin mt-4 mb-8">Aucun type de nutrition trouvé pour cet animal.</p>
             )}
 
             {selectedAnimalId > 0 && foodTypes && foodTypes.length > 0 && (
@@ -155,7 +168,7 @@ export default function Nutrition() {
                                 <h3 className="inline-block py-1 px-4 bg-[#87462938] text-center rounded-[0.9rem] text-[#ca814e] text-[1.1rem] font-[800] ">{foodType.name}</h3>
 
                                 <h4 className="text-[#d4a07d] font-[300] text-[1rem] mt-4">Description</h4>
-                                <li className="text-slate-300 font-thin text-justify mt-4 mb-4">{foodType.description}</li>
+                                <li className="font-thin text-justify mt-4 mb-4">{foodType.description}</li>
 
                                 {/* Gestion des états de chargement et d'erreur pour les avantages */}
                                 {isLoadingAdvantages && <p className="text-center text-slate-300 font-thin mt-4 mb-8">Chargement des avantages...</p>}
@@ -166,34 +179,59 @@ export default function Nutrition() {
                                     <p className="text-center text-slate-300 font-thin mt-4 mb-8">Aucun avantage trouvé pour ce type de nutrition.</p>
                                 )}
 
-                                {/* Affichage des avantages */}
-                                <h4>Avantages</h4>
-                                {advantages && advantages.length > 0 && (
-                                    <ul>
-                                        {advantages.map((advantage) => (
-                                            <li key={advantage.label}>{advantage.label}</li>
-                                        ))}
-                                    </ul>
-                                )}
-
                                 {/* Gestion des états de chargement et d'erreur pour les inconvénients */}
-                                {isLoadingDisadvantages && <p className="text-center text-slate-300 font-thin mt-4 mb-8">Chargement des inconvénients...</p>}
+                                {isLoadingDisadvantages && <p className="text-center font-thin mt-4 mb-8">Chargement des inconvénients...</p>}
 
                                 {isErrorDisadvantages && <p className="text-center text-red-400 mt-4 mb-8">Erreur inconvénients: {(disadvantagesError as Error).message}</p>}
 
                                 {disadvantages && disadvantages.length === 0 && (
-                                    <p className="text-center text-slate-300 font-thin mt-4 mb-8">Aucun inconvénient trouvé pour ce type de nutrition.</p>
+                                    <p className="text-center font-thin mt-4 mb-8">Aucun inconvénient trouvé pour ce type de nutrition.</p>
                                 )}
 
-                                {/* Affichage des inconvénients */}
-                                <h4>Inconvénients</h4>
-                                {disadvantages && disadvantages.length > 0 && (
-                                    <ul>
-                                        {disadvantages.map((disadvantage) => (
-                                            <li key={disadvantage.label}>{disadvantage.label}</li>
-                                        ))}
-                                    </ul>
-                                )}
+                                {/* Affichage des avantages et inconvénients */}
+                                <div className="flex justify-around text-[#ca814e] text-[1.1rem] font-[800] mb-4 mt-8">
+                                    <h4 aria-label="Avantages" className="flex items-center text-emerald-400">
+                                        <span
+                                            aria-hidden="true"
+                                            className="inline-flex items-center justify-center"
+                                            dangerouslySetInnerHTML={{ __html: inlineAdvantagesLogo }}
+                                        />
+                                    </h4>
+                                    <h4 aria-label="Inconvénients" className="flex items-center text-red-400">
+                                        <span
+                                            aria-hidden="true"
+                                            className="inline-flex items-center justify-center"
+                                            dangerouslySetInnerHTML={{ __html: inlineDisadvantagesLogo }}
+                                        />
+                                    </h4>
+                                </div>
+
+                                {/* Avantages */}
+                                <div className="flex justify-around">
+                                    {advantages && advantages.length > 0 && (
+                                        <ul className="pr-4">
+                                            {advantages.map((advantage) => (
+                                                <li key={advantage.label} className="mb-2 flex items-center gap-2">
+                                                    <span className="inline-block h-[0.3rem] w-[0.3rem] rounded-full bg-gray-400 flex-shrink-0" />
+                                                    {advantage.label}
+                                                </li>
+                                            ))}
+                                        </ul>
+                                    )}
+
+                                    {/* Inconvénients */}
+                                    {disadvantages && disadvantages.length > 0 && (
+                                        <ul>
+                                            {disadvantages.map((disadvantage) => (
+                                                <li key={disadvantage.label} className="mb-2 flex items-center gap-2">
+                                                    <span className="inline-block h-[0.3rem] w-[0.3rem] rounded-full bg-gray-400 flex-shrink-0" />
+                                                    {disadvantage.label}
+                                                </li>
+                                            ))}
+                                        </ul>
+                                    )}
+                                </div>
+
                             </ul>
                         </li>
                     ))}
