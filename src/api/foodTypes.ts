@@ -1,6 +1,7 @@
 import { API_URL } from "../config";
 
 type FoodTypeResponse = {
+    id: number;
     name: string;
     description: string;
 }
