@@ -91,9 +91,6 @@ export default function Dropdown({ selectedAnimalId, setSelectedAnimalId }: Drop
                     </div>
                 )}
             </div>
-            {selectedAnimalId === 0 && (
-                <p className="text-center text-slate-300 font-thin mt-4 mb-8">Veuillez sélectionner un type d'animal pour voir les recommandations de santé.</p>
-            )}
         </div>
     )
 }

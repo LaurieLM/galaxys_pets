@@ -19,6 +19,10 @@ export default function Health() {
                 {/* Dropdown pour sélectionner le type d'animal */}
                 <Dropdown selectedAnimalId={selectedAnimalId} setSelectedAnimalId={setSelectedAnimalId} />
 
+                {selectedAnimalId === 0 && (
+                    <p className="text-center text-slate-300 font-thin mt-4 mb-8">Veuillez sélectionner un type d'animal pour voir les recommandations de santé.</p>
+                )}
+
                 {/* Affichage des recommandations de santé pour l'animal sélectionné */}
                 <GeneralInfo selectedAnimalId={selectedAnimalId} />
 
