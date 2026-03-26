@@ -7,6 +7,7 @@ import nutritionLogo from "../assets/nutrition_logo.svg?raw";
 import useFoodTypes from "../hooks/useFoodTypes";
 import useAdvantages from "../hooks/useAdvantages";
 import useDisadvantages from "../hooks/useDisadvantages";
+import useDangerousFood from "../hooks/useDangerousFood";
 
 export default function Nutrition() {
 
@@ -59,6 +60,13 @@ export default function Nutrition() {
         isError: isErrorDisadvantages,
         error: disadvantagesError,
     } = useDisadvantages(selectedAnimalId);
+
+    const {
+        data: dangerousFood,
+        isLoading: isLoadingDangerousFood,
+        isError: isErrorDangerousFood,
+        error: dangerousFoodError,
+    } = useDangerousFood(selectedAnimalId);
 
     useEffect(() => {
         function handleClickOutside(event: MouseEvent) {
@@ -188,7 +196,7 @@ export default function Nutrition() {
                                     <p className="text-center font-thin mt-4 mb-8">Aucun inconvénient trouvé pour ce type de nutrition.</p>
                                 )}
 
-                                {/* Affichage des avantages et inconvénients */}
+                                {/* Affichage des logos avantages et inconvénients */}
                                 <div className="flex justify-around text-[#ca814e] text-[1.1rem] font-[800] mb-4 mt-8">
                                     <h4 aria-label="Avantages" className="flex items-center text-emerald-400">
                                         <span
@@ -235,6 +243,27 @@ export default function Nutrition() {
                             </ul>
                         </li>
                     ))}
+                </ul>
+            )}
+            
+            {/* Affichage des aliments dangereux pour l'animal sélectionné */}
+            <h4>Aliments dangereux</h4>
+
+            {/* Gestion des états de chargement et d'erreur pour les aliments dangereux */}
+            {selectedAnimalId > 0 && isLoadingDangerousFood && <p className="text-center font-thin mt-4 mb-8">Chargement des aliments dangereux...</p>}
+
+            {selectedAnimalId > 0 && isErrorDangerousFood && <p className="text-center text-red-400 mt-4 mb-8">Erreur aliments dangereux: {(dangerousFoodError as Error).message}</p>}
+
+            {selectedAnimalId > 0 && dangerousFood && dangerousFood.length === 0 && (
+                <p className="text-center font-thin mt-4 mb-8">Aucun aliment dangereux trouvé pour ce type d'animal.</p>
+            )}
+
+            {selectedAnimalId > 0 && dangerousFood && dangerousFood.length > 0 && (
+                <ul>
+                    {dangerousFood.map((dangerous) => (
+                        <li key={dangerous.name}>{dangerous.name}</li>
+                    ))}
+                    
                 </ul>
             )}
         </section>
