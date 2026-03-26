@@ -1,9 +1,11 @@
 import { useEffect, useRef, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import getAnimals from "../api/animals";
-import advantagesLogo from "../assets/advantages_logo.svg?raw";
-import disadvantagesLogo from "../assets/disadvantages_logo.svg?raw";
-import nutritionLogo from "../assets/nutrition_logo.svg?raw";
+import advantagesLogo from "../assets/advantages_logo_green.svg";
+import disadvantagesLogo from "../assets/disadvantages_logo_red.svg";
+import nutritionLogo from "../assets/nutrition_logo_colored.svg";
+import dangerousFoodLogo from "../assets/dangerous_food_logo.svg";
+import chevronLogo from "../assets/chevron_logo.svg";
 import useFoodTypes from "../hooks/useFoodTypes";
 import useAdvantages from "../hooks/useAdvantages";
 import useDisadvantages from "../hooks/useDisadvantages";
@@ -16,19 +18,7 @@ export default function Nutrition() {
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
     const dropdownRef = useRef<HTMLDivElement | null>(null);
 
-    // Logo 
-    const inlineNutritionLogo = nutritionLogo
-        .replace('<svg', '<svg width="48" height="48" style="display:block"')
-        .replace(/<\?xml[^>]*>/g, '');
 
-    const inlineAdvantagesLogo = advantagesLogo
-        .replace('<svg', '<svg width="18" height="36" style="display:block"')
-        .replace(/<\?xml[^>]*>/g, '');
-
-    const inlineDisadvantagesLogo = disadvantagesLogo
-        .replace('<svg', '<svg width="18" height="36" style="display:block"')
-        .replace(/<\?xml[^>]*>/g, '');
-        
 
     const {
         data: animals,
@@ -92,11 +82,7 @@ export default function Nutrition() {
     return (
         <section className="text-slate-300 ">
             <h2 className="mt-4 mb-8 flex items-center justify-center gap-3 text-center text-3xl font-bold text-[#ca814e]">
-                <span
-                    aria-hidden="true"
-                    className="inline-flex h-12 w-12 items-center justify-center"
-                    dangerouslySetInnerHTML={{ __html: inlineNutritionLogo }}
-                />
+                <img src={nutritionLogo} alt="Icône nutrition" className="h-12 w-12" />
                 Nutrition
             </h2>
 
@@ -111,9 +97,11 @@ export default function Nutrition() {
                         <span className="truncate">
                             {selectedAnimal ? selectedAnimal.type : "Type d'animal"}
                         </span>
-                        <span className={`text-sm transition-transform ${isDropdownOpen ? "rotate-180" : ""}`}>
-                            v
-                        </span>
+                        <img
+                            src={chevronLogo}
+                            alt=""
+                            className={`h-4 w-4 transition-transform ${isDropdownOpen ? "rotate-180" : ""}`}
+                        />
                     </button>
 
                     {isDropdownOpen && (
@@ -199,18 +187,10 @@ export default function Nutrition() {
                                 {/* Affichage des logos avantages et inconvénients */}
                                 <div className="flex justify-around text-[#ca814e] text-[1.1rem] font-[800] mb-4 mt-8">
                                     <h4 aria-label="Avantages" className="flex items-center text-emerald-400">
-                                        <span
-                                            aria-hidden="true"
-                                            className="inline-flex items-center justify-center"
-                                            dangerouslySetInnerHTML={{ __html: inlineAdvantagesLogo }}
-                                        />
+                                        <img src={advantagesLogo} alt="Avantages" className="h-9 w-[18px]" />
                                     </h4>
                                     <h4 aria-label="Inconvénients" className="flex items-center text-red-400">
-                                        <span
-                                            aria-hidden="true"
-                                            className="inline-flex items-center justify-center"
-                                            dangerouslySetInnerHTML={{ __html: inlineDisadvantagesLogo }}
-                                        />
+                                        <img src={disadvantagesLogo} alt="Inconvénients" className="h-9 w-[18px]" />
                                     </h4>
                                 </div>
 
@@ -247,7 +227,12 @@ export default function Nutrition() {
             )}
             
             {/* Affichage des aliments dangereux pour l'animal sélectionné */}
-            <h4>Aliments dangereux</h4>
+            {selectedAnimalId > 0 && (
+                <h4 className="mt-4 mb-8 flex items-center justify-center gap-3 text-center text-[1.3rem] font-bold text-[#ca814e]">
+                    <img src={dangerousFoodLogo} alt="Icône aliments dangereux" className="h-10 w-10" />
+                    Aliments dangereux
+                </h4>
+            )}
 
             {/* Gestion des états de chargement et d'erreur pour les aliments dangereux */}
             {selectedAnimalId > 0 && isLoadingDangerousFood && <p className="text-center font-thin mt-4 mb-8">Chargement des aliments dangereux...</p>}
@@ -257,15 +242,19 @@ export default function Nutrition() {
             {selectedAnimalId > 0 && dangerousFood && dangerousFood.length === 0 && (
                 <p className="text-center font-thin mt-4 mb-8">Aucun aliment dangereux trouvé pour ce type d'animal.</p>
             )}
-
-            {selectedAnimalId > 0 && dangerousFood && dangerousFood.length > 0 && (
-                <ul>
-                    {dangerousFood.map((dangerous) => (
-                        <li key={dangerous.name}>{dangerous.name}</li>
-                    ))}
-                    
-                </ul>
-            )}
+            
+            <div className="mx-4 mb-8">
+                {selectedAnimalId > 0 && dangerousFood && dangerousFood.length > 0 && (
+                    <ul className="grid grid-cols-2 gap-y-1">
+                        {dangerousFood.map((dangerous) => (
+                            <li key={dangerous.name} className="mb-2 flex items-center gap-2">
+                                <span className="inline-block h-[0.3rem] w-[0.3rem] rounded-full bg-gray-400 flex-shrink-0" />
+                                {dangerous.name}
+                            </li>
+                        ))}
+                    </ul>
+                )}
+            </div>
         </section>
     );
 }
