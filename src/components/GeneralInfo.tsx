@@ -15,10 +15,6 @@ export default function GeneralInfo({ selectedAnimalId }: GeneralInfoProps) {
         
     return (
         <div>
-            {selectedAnimalId === 0 && (
-                <p className="text-center text-slate-300 font-thin mt-4 mb-8">Veuillez sélectionner un type d'animal pour voir les recommandations de santé.</p>
-            )}
-
             {selectedAnimalId > 0 && isLoadingHealth && <p>Chargement des recommandations de santé...</p>}
             {selectedAnimalId > 0 && isErrorHealth && (
                 <p>Erreur : {(healthError as Error).message}</p>
