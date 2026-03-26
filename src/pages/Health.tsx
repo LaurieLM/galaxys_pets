@@ -1,23 +1,15 @@
 import { useState } from "react";
-import useHealth from "../hooks/useHealth";
 import useVaccines from "../hooks/useVaccines";
 import useDiseases from "../hooks/useDiseases";
 import healthSectionLogo from "../assets/health_section_logo.svg";
 import vaccineLogo from "../assets/vaccine_logo.svg";
 import diseaseLogo from "../assets/disease_logo.svg";
 import Dropdown from "../components/Dropdown";
+import GeneralInfo from "../components/GeneralInfo";
 
 export default function Health() {
-
     // State pour l'animal sélectionné et l'ouverture du dropdown
     const [selectedAnimalId, setSelectedAnimalId] = useState<number>(0);
-
-    const {
-        data: health,
-        isLoading: isLoadingHealth,
-        isError: isErrorHealth,
-        error: healthError
-    } = useHealth(selectedAnimalId);
 
     const { 
         data: vaccines, 
@@ -42,29 +34,7 @@ export default function Health() {
 
                 {/* Dropdown pour sélectionner le type d'animal */}
                 <Dropdown selectedAnimalId={selectedAnimalId} setSelectedAnimalId={setSelectedAnimalId} />
-
-                {/* Affichage des recommandations de santé et des vaccins en fonction de l'animal sélectionné */}
-                {selectedAnimalId === 0 && (
-                    <p className="text-center text-slate-300 font-thin mt-4 mb-8">Veuillez sélectionner un type d'animal pour voir les recommandations de santé.</p>
-                )}
-
-                {selectedAnimalId > 0 && isLoadingHealth && <p>Chargement des recommandations de santé...</p>}
-                {selectedAnimalId > 0 && isErrorHealth && (
-                    <p>Erreur : {(healthError as Error).message}</p>
-                )}
-
-                {selectedAnimalId > 0 && health && (
-                    <div className="m-4">
-                        <h3 className="font-medium text-[1.1rem] text-[#b8e3c8]">Fréquence vermifuge</h3>
-                        <p className="text-center text-slate-300 font-thin mt-4 mb-8">{health.dewormingFrequency}</p>
-
-                        <h3 className="font-medium text-[1.1rem] text-[#b8e3c8]">Fréquence visite vétérinaire</h3>
-                        <p className="text-center text-slate-300 font-thin mt-4 mb-8">{health.vetCheckFrequency}</p>
-
-                        <h3 className="font-medium text-[1.1rem] text-[#b8e3c8]">Conseils</h3>
-                        <p className="text-justify text-slate-300 font-thin mt-4 mb-8 mr-4 ml-4">{health.generalAdvice}</p>
-                    </div>
-                )}
+                <GeneralInfo selectedAnimalId={selectedAnimalId} />
 
                 {/* Affichage des vaccins recommandés */}
                 {selectedAnimalId > 0 && (
