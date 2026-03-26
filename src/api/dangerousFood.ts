@@ -4,7 +4,7 @@ type DangerousFoodResponse = {
     name: string;
 }
 
-export default async function getDangerousFood(animalId: string): Promise<DangerousFoodResponse[]> {
+export default async function getDangerousFood(animalId: number): Promise<DangerousFoodResponse[]> {
     const res = await fetch(`${API_URL}/animals/${animalId}/dangerous-food`);
     if (!res.ok) {
         throw new Error("Failed to fetch dangerous food");
