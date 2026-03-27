@@ -1,12 +1,14 @@
 import useVaccines from "../hooks/useVaccines";
 import Filter from "./Filter";
-import { useState } from "react";
+
 
 type VaccinesProps = {
     selectedAnimalId: number;
+    selectedVaccineName: string;
+    setSelectedVaccineName: (name: string) => void;
 };
 
-export default function VaccineList({ selectedAnimalId }: VaccinesProps) {
+export default function VaccineList({ selectedAnimalId, selectedVaccineName, setSelectedVaccineName }: VaccinesProps) {
     // Récupération de tous les vaccins pour l'animal sélectionné
     const {
         data: vaccines,
@@ -14,9 +16,6 @@ export default function VaccineList({ selectedAnimalId }: VaccinesProps) {
         isError,
         error,
     } = useVaccines(selectedAnimalId);
-
-    // Stockage du nom du vaccin sélectionné dans le filtre
-    const [selectedVaccineName, setSelectedVaccineName] = useState<string>("");
 
     // Transformation de la liste de vaccins en options pour le composant le filtre
     const vaccineOptions =
@@ -55,12 +54,6 @@ export default function VaccineList({ selectedAnimalId }: VaccinesProps) {
                 </div>
             )}
 
-            {/* Affichage d'un message si aucun vaccin n'est sélectionné */}
-            {!selectedVaccine && vaccines && vaccines.length > 0 && (
-                <p className="text-center font-thin mt-4 text-slate-400">
-                    Sélectionnez un vaccin pour voir les détails.
-                </p>
-            )}
         </div>
     );
 }

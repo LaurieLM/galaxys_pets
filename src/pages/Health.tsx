@@ -10,6 +10,10 @@ export default function Health() {
     // State pour l'animal sélectionné et l'ouverture du dropdown
     const [selectedAnimalId, setSelectedAnimalId] = useState<number>(0);
 
+    // State pour le vaccin et la maladie sélectionnés dans les filtres
+    const [selectedVaccineName, setSelectedVaccineName] = useState<string>("");
+    const [selectedDiseaseName, setSelectedDiseaseName] = useState<string>("");
+
     return (
         <section> 
             {/* Dropdown pour sélectionner le type d'animal */}
@@ -19,22 +23,26 @@ export default function Health() {
                 <img src={healthSectionLogo} alt="Icône santé" className="h-12 w-12" />
                 Santé
             </h2>
-
+            
             {/* Filtres pour les vaccins et les maladies */}
             <div className="flex justify-around">
-                <VaccineList selectedAnimalId={selectedAnimalId} />
+                <VaccineList selectedAnimalId={selectedAnimalId} selectedVaccineName={selectedVaccineName} setSelectedVaccineName={setSelectedVaccineName} />
+                <DiseaseList selectedAnimalId={selectedAnimalId}  selectedDiseaseName={selectedDiseaseName} setSelectedDiseaseName={setSelectedDiseaseName} />
             </div>
-
-
-            {selectedAnimalId === 0 && (
-                <p className="text-[1.2rem] text-center text-slate-300 font-thin mt-32 mr-4 ml-4">Veuillez sélectionner un type d'animal pour voir les recommandations de santé.</p>
-            )}
 
             {/* Affichage des recommandations de santé pour l'animal sélectionné */}
             <GeneralInfo selectedAnimalId={selectedAnimalId} />
 
-            {/* Affichage des maladies courantes pour l'animal sélectionné */}
-            <DiseaseList selectedAnimalId={selectedAnimalId} />
+            {/* Affichage d'un message si aucun animal n'est sélectionné */}
+            {selectedAnimalId === 0 && (
+                <p className="text-[1.2rem] text-center text-slate-300 font-thin mt-32 mr-4 ml-4">Veuillez sélectionner un type d'animal pour voir les recommandations de santé.</p>
+            )}
+            
+            {/* Affichage d'un message si un animal est sélectionné mais aucun vaccin ou maladie n'est sélectionné */}
+            {selectedAnimalId > 0 && selectedVaccineName === "" && selectedDiseaseName === "" && (
+                <p className="text-[1.2rem] text-center text-slate-300 font-thin mt-32 mr-4 ml-4">Veuillez sélectionner un vaccin ou une maladie pour voir ses informations.</p>
+            )}
+            
         </section>
     );
 }

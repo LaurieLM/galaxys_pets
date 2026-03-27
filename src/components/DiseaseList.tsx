@@ -1,12 +1,13 @@
 import useDiseases from "../hooks/useDiseases";
 import Filter from "./Filter";
-import { useState } from "react";
 
 type DiseaseProps = {
     selectedAnimalId: number;
+    selectedDiseaseName: string;
+    setSelectedDiseaseName: (name: string) => void;
 }
 
-export default function DiseaseList({ selectedAnimalId }: DiseaseProps) {
+export default function DiseaseList({ selectedAnimalId, selectedDiseaseName, setSelectedDiseaseName }: DiseaseProps) {
     // Recupération de toutes les maladies pour l'animal sélectionné
     const {
         data: diseases,
@@ -14,9 +15,6 @@ export default function DiseaseList({ selectedAnimalId }: DiseaseProps) {
         isError,
         error,
     } = useDiseases(selectedAnimalId);
-
-    // Stockage du nom de la maladie sélectionnée dans le filtre
-    const [selectedDiseaseName, setSelectedDiseaseName] = useState<string>("");
 
     // Transformation de la liste de maladies en options pour le composant le filtre
     const diseaseOptions =
@@ -46,11 +44,6 @@ export default function DiseaseList({ selectedAnimalId }: DiseaseProps) {
                     <h4 className="mb-2 text-[1rem] font-semibold text-[#b8e3c8]">{selectedDisease.name}</h4>
                     <p className="mb-4 text-justify font-thin">{selectedDisease.description}</p>
                 </div>
-            )}
-
-            {/* Affichage d'un message si aucune maladie n'est sélectionnée */}
-            {!selectedDisease && diseases && diseases.length > 0 && (
-                <p className="text-center font-thin mt-4 text-slate-400">Veuillez sélectionner une maladie pour voir les détails.</p>
             )}
         </div>
     )
