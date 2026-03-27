@@ -1,10 +1,10 @@
 import { useState } from "react";
 import healthSectionLogo from "../assets/health_section_logo.svg";
 import Dropdown from "../components/Dropdown";
-import Filter from "../components/Filter";
 import GeneralInfo from "../components/GeneralInfo";
-import VaccineInfo from "../components/VaccineInfo";
+import VaccineList from "../components/VaccineList";
 import Disease from "../components/Disease";
+
 
 export default function Health() {
     // State pour l'animal sélectionné et l'ouverture du dropdown
@@ -22,23 +22,7 @@ export default function Health() {
 
             {/* Filtres pour les vaccins et les maladies */}
             <div className="flex justify-around">
-                <Filter
-                    label="Filtrer par vaccins"
-                    options={[
-                        { value: "vaccine", label: "Vaccins" },
-                    ]}
-                    selectedValue="vaccine"
-                    onChange={(value) => console.log(value)}
-                />
-
-                <Filter
-                    label="Filtrer par maladies"
-                    options={[
-                        { value: "disease", label: "Maladies" },
-                    ]}
-                    selectedValue="disease"
-                    onChange={(value) => console.log(value)}
-                />
+                <VaccineList selectedAnimalId={selectedAnimalId} />
             </div>
 
 
@@ -48,9 +32,6 @@ export default function Health() {
 
             {/* Affichage des recommandations de santé pour l'animal sélectionné */}
             <GeneralInfo selectedAnimalId={selectedAnimalId} />
-
-            {/* Affichage des vaccins recommandés */}
-            <VaccineInfo selectedAnimalId={selectedAnimalId} />
 
             {/* Affichage des maladies courantes */}
             <Disease selectedAnimalId={selectedAnimalId} />
