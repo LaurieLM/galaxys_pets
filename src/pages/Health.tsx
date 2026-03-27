@@ -15,7 +15,7 @@ export default function Health() {
             {/* Dropdown pour sélectionner le type d'animal */}
             <Dropdown selectedAnimalId={selectedAnimalId} setSelectedAnimalId={setSelectedAnimalId} />
 
-            <h2 className="flex items-center justify-center gap-3 text-center text-3xl font-bold text-[#8fd3a9] mt-4">
+            <h2 className="flex items-center justify-center gap-3 text-center text-3xl font-bold text-[#8fd3a9] mb-4">
                 <img src={healthSectionLogo} alt="Icône santé" className="h-12 w-12" />
                 Santé
             </h2>
