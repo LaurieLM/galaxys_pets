@@ -3,7 +3,7 @@ import healthSectionLogo from "../assets/health_section_logo.svg";
 import Dropdown from "../components/Dropdown";
 import GeneralInfo from "../components/GeneralInfo";
 import VaccineList from "../components/VaccineList";
-import Disease from "../components/Disease";
+import DiseaseList from "../components/DiseaseList";
 
 
 export default function Health() {
@@ -33,8 +33,8 @@ export default function Health() {
             {/* Affichage des recommandations de santé pour l'animal sélectionné */}
             <GeneralInfo selectedAnimalId={selectedAnimalId} />
 
-            {/* Affichage des maladies courantes */}
-            <Disease selectedAnimalId={selectedAnimalId} />
+            {/* Affichage des maladies courantes pour l'animal sélectionné */}
+            <DiseaseList selectedAnimalId={selectedAnimalId} />
         </section>
     );
 }
