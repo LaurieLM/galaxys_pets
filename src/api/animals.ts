@@ -2,7 +2,8 @@ import { API_URL } from '../config';
 
 type AnimalResponse = {
         id: number,
-        type: string
+        type: string,
+        image_url: string,
 };
 
 export default async function getAnimals(): Promise<AnimalResponse[]> {

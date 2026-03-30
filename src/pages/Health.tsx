@@ -1,17 +1,30 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useSearchParams } from "react-router-dom";
 import healthSectionLogo from "../assets/health_section_logo.svg";
 import Dropdown from "../components/Dropdown";
 import Filter from "../components/Filter";
 import GeneralInfo from "../components/GeneralInfo";
 import VaccineInfo from "../components/VaccineInfo";
 import Disease from "../components/Disease";
+import Navbar from "../components/Navbar";
 
 export default function Health() {
+    const [searchParams] = useSearchParams();
+    // const animalIdParam = searchParams.get("animalId");
+
     // State pour l'animal sélectionné et l'ouverture du dropdown
     const [selectedAnimalId, setSelectedAnimalId] = useState<number>(0);
 
+    useEffect(() => {
+        const parsedAnimalId = Number(searchParams.get("animalId"));
+        if (parsedAnimalId > 0) {
+            setSelectedAnimalId(parsedAnimalId);
+        }
+    }, [searchParams]);
+
     return (
         <section> 
+            <Navbar />
             {/* Dropdown pour sélectionner le type d'animal */}
             <Dropdown selectedAnimalId={selectedAnimalId} setSelectedAnimalId={setSelectedAnimalId} />
 

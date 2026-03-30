@@ -3,7 +3,8 @@ USE galaxys_pets;
 
 CREATE TABLE animals (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    type VARCHAR(25) NOT NULL
+    type VARCHAR(25) NOT NULL,
+    image_url VARCHAR(255)
 ) ENGINE=InnoDB
 DEFAULT CHARSET=utf8mb4
 COLLATE=utf8mb4_unicode_ci;
@@ -170,12 +171,12 @@ COLLATE=utf8mb4_unicode_ci;
 // INSERTION DES DONNEES
 
 // TYPE ANIMAUX
-INSERT INTO animals (type) VALUES
-('Chien'),
-('Chat'),
-('Cheval'),
-('Lapin'),
-('Hamster');
+INSERT INTO animals (type, image_url) VALUES
+('Chien', 'public/animals/dog.jpg'),
+('Chat', 'public/animals/cat.jpg'),
+('Cheval', 'public/animals/horse.jpg'),
+('Lapin', 'public/animals/rabbit.jpg'),
+('Hamster', 'public/animals/hamster.jpg');
 
 // ALIMENTATION
 INSERT INTO food_types (name, description) VALUES
