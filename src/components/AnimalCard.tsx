@@ -1,7 +1,9 @@
-import useAnimals from "../hooks/useAnimals"
-
+import { useNavigate } from "react-router-dom";
+import useAnimals from "../hooks/useAnimals";
 
 export default function AnimalCard() {
+    const navigate = useNavigate();
+
     const {
         data: animals,
         isLoading: isLoadingAnimals,
@@ -24,8 +26,14 @@ export default function AnimalCard() {
                 <ul className="flex flex-wrap justify-center items-center mx-4 my-8">
                     {animals.map((animal) => (
                         <li key={animal.id} className="flex flex-col items-center flex-2 rounded bg-slate-800/40 p-4">
-                            <img src={animal.image_url} alt={animal.type} className="w-28 h-28 rounded"/>
-                            <h3 className="inline-block rounded-[0.9rem] px-4 py-1 text-center text-[1.1rem] font-[800]">{animal.type}</h3>
+                            <button
+                                type="button"
+                                className="flex flex-col items-center"
+                                onClick={() => navigate(`/health?animalId=${animal.id}`)}
+                            >
+                                <img src={animal.image_url} alt={animal.type} className="w-28 h-28 rounded" />
+                                <h3 className="inline-block rounded-[0.9rem] px-4 py-1 text-center text-[1.1rem] font-[800]">{animal.type}</h3>
+                            </button>
                         </li>
                     ))}
                 </ul>
