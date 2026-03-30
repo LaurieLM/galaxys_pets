@@ -1,3 +1,5 @@
+import AnimalCard from "../components/AnimalCard"
+
 export default function Home() {
 
     return (
@@ -8,7 +10,7 @@ export default function Home() {
             </div>
             <div>
                 <h2 className="text-[1.5rem] text-center text-[#8fd3a9] font-bold mt-8">Choisis un type d'animal pour commencer :</h2>
-
+                <AnimalCard/>
             </div>
         </section>
         
