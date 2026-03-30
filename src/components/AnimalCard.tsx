@@ -21,9 +21,10 @@ export default function AnimalCard() {
             )}
 
             {animals && animals.length > 0 && (
-                <ul className="ml-4 mr-4 space-y-4">
+                <ul className="flex flex-wrap justify-center items-center mx-4 my-8">
                     {animals.map((animal) => (
-                        <li key={animal.id} className="rounded bg-slate-800/40 p-4">
+                        <li key={animal.id} className="flex flex-col items-center flex-2 rounded bg-slate-800/40 p-4">
+                            <img src={animal.image_url} alt={animal.type} className="w-28 h-28 rounded"/>
                             <h3 className="inline-block rounded-[0.9rem] px-4 py-1 text-center text-[1.1rem] font-[800]">{animal.type}</h3>
                         </li>
                     ))}
