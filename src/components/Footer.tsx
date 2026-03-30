@@ -1,6 +1,6 @@
 export default function Footer() {
     return (
-        <footer className="bg-pink-50 text-center border-t border-gray-200 shadow-sm">
+        <footer className="bg-slate-800 text-white text-center">
             <p className="font-thin text-[0.80rem] pt-4 pb-4">
                 &copy; 2026 Galaxy's Pets - Plateforme d'informations animalières <br />
                 Tous droits réservés. <br /> <br />
