@@ -5,6 +5,7 @@ import Filter from "../components/Filter";
 import GeneralInfo from "../components/GeneralInfo";
 import VaccineInfo from "../components/VaccineInfo";
 import Disease from "../components/Disease";
+import Navbar from "../components/Navbar";
 
 export default function Health() {
     // State pour l'animal sélectionné et l'ouverture du dropdown
@@ -12,6 +13,7 @@ export default function Health() {
 
     return (
         <section> 
+            <Navbar />
             {/* Dropdown pour sélectionner le type d'animal */}
             <Dropdown selectedAnimalId={selectedAnimalId} setSelectedAnimalId={setSelectedAnimalId} />
 
