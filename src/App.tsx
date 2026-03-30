@@ -16,7 +16,7 @@ export default function App() {
             
             <main className="flex-grow">
                 <Routes>
-                    <Route path="/" element={<Navigate to="/shelters" replace />} />
+                    <Route path="/home" element={<Navigate to="/home" replace />} />
                     <Route path="/shelters" element={<Shelters />} />
                     <Route path="/health" element={<Health />} />
                     <Route path="/nutrition" element={<Nutrition />} />
