@@ -4,7 +4,7 @@ import healthSectionLogo from "../assets/health_section_logo.svg";
 import GeneralInfo from "../components/GeneralInfo";
 import VaccineInfo from "../components/VaccineInfo";
 import Disease from "../components/Disease";
-import Navbar from "../components/Navbar";
+import Tab from "../components/Tab";
 
 export default function Health() {
     const [searchParams] = useSearchParams();
@@ -36,7 +36,7 @@ export default function Health() {
             {/* Affichage des maladies courantes */}
             <Disease selectedAnimalId={selectedAnimalId} />
             
-            <Navbar />
+            <Tab/>
         </section>
     );
 }

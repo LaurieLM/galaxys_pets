@@ -1,11 +1,11 @@
-interface BtnNavbarProps {
+interface BtnTabProps {
     logo: string;
     text: string;
     color: 'blue' | 'emerald' | 'orange';
     active?: boolean;
 }
 
-export default function BtnNavbar({ logo, text, color, active = false }: BtnNavbarProps) {
+export default function BtnTab({ logo, text, color, active = false }: BtnTabProps) {
     const activeColorClasses = {
         blue: 'text-blue-600 bg-blue-50',
         emerald: 'text-emerald-600 bg-emerald-50',
