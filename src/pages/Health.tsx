@@ -8,7 +8,6 @@ import Tab from "../components/Tab";
 
 export default function Health() {
     const [searchParams] = useSearchParams();
-    // const animalIdParam = searchParams.get("animalId");
 
     // State pour l'animal sélectionné et l'ouverture du dropdown
     const [selectedAnimalId, setSelectedAnimalId] = useState<number>(0);
@@ -22,7 +21,7 @@ export default function Health() {
 
     return (
         <section> 
-            <h2 className="flex items-center justify-center gap-3 text-center text-3xl font-bold text-[#8fd3a9] mb-4">
+            <h2 className="flex items-center justify-center gap-3 text-center text-3xl font-bold text-[#8fd3a9] my-8">
                 <img src={healthSectionLogo} alt="Icône santé" className="h-12 w-12" />
                 Santé
             </h2>
@@ -36,6 +35,7 @@ export default function Health() {
             {/* Affichage des maladies courantes */}
             <Disease selectedAnimalId={selectedAnimalId} />
             
+            {/* Affichage de la barre de navigation en bas de l'écran */}
             <Tab/>
         </section>
     );

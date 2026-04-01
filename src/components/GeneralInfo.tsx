@@ -15,6 +15,11 @@ export default function GeneralInfo({ selectedAnimalId }: GeneralInfoProps) {
         
     return (
         <div>
+            {selectedAnimalId > 0 && (
+                <h3 className="mx-4 my-8 flex items-center justify-center gap-3 text-center font-black text-[1.3rem] text-[#b8e3c8]">
+                    Informations générales
+                </h3>
+            )}
             {selectedAnimalId > 0 && isLoadingHealth && <p>Chargement des recommandations de santé...</p>}
             {selectedAnimalId > 0 && isErrorHealth && (
                 <p>Erreur : {(healthError as Error).message}</p>
