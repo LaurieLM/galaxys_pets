@@ -1,4 +1,4 @@
-import { Navigate, Route, Routes } from "react-router-dom";
+import { Navigate, Route, Routes, useLocation } from "react-router-dom";
 import Shelters from "./pages/Shelters";
 import Nutrition from "./pages/Nutrition";
 import Health from "./pages/Health";
@@ -7,6 +7,8 @@ import Header from "./components/Header";
 import Footer from "./components/Footer";
 
 export default function App() {
+    const { pathname } = useLocation();
+    const footerWithBottomSpace = ["/health", "/nutrition", "/shelters"].includes(pathname);
 
 
     return (
@@ -23,7 +25,7 @@ export default function App() {
                 </Routes>
             </main>
 
-            <Footer />
+            <Footer className={footerWithBottomSpace ? "mb-16" : ""} />
         </div>
     )
 }
