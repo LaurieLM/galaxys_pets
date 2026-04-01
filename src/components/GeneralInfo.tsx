@@ -15,26 +15,35 @@ export default function GeneralInfo({ selectedAnimalId }: GeneralInfoProps) {
         
     return (
         <div>
-            {selectedAnimalId > 0 && (
-                <h3 className="mx-4 my-8 flex items-center justify-center gap-3 text-center font-black text-[1.3rem] text-[#b8e3c8]">
-                    Informations générales
-                </h3>
-            )}
-            {selectedAnimalId > 0 && isLoadingHealth && <p>Chargement des recommandations de santé...</p>}
+            {selectedAnimalId > 0 && isLoadingHealth && <p className="mt-4 mb-8 text-center font-thin">Chargement des recommandations de santé...</p>}
             {selectedAnimalId > 0 && isErrorHealth && (
-                <p>Erreur : {(healthError as Error).message}</p>
+                <p className="mt-4 mb-8 text-center text-red-400">Erreur : {(healthError as Error).message}</p>
             )}
 
             {selectedAnimalId > 0 && health && (
-                <div className="m-4">
-                    <h3 className="font-medium text-[1.1rem] text-[#b8e3c8]">Fréquence vermifuge</h3>
-                    <p className="text-center text-slate-300 font-thin mt-4 mb-8">{health.dewormingFrequency}</p>
+                <div className="mx-4 rounded-2xl border border-emerald-400/25 bg-slate-900/40 shadow-[0_8px_24px_rgba(0,0,0,0.18)]">
+                    <div className="border-b border-emerald-300/15 bg-gradient-to-r from-emerald-500/15 via-teal-500/10 to-slate-900/0 px-5 py-4">
+                        <p className="text-[0.78rem] font-semibold uppercase tracking-[0.22em] text-emerald-200/70">Suivi santé</p>
+                        <h4 className="mt-1 text-[1.05rem] font-semibold text-emerald-100">Recommandations générales</h4>
+                        <p className="mt-1 max-w-[34rem] text-sm text-slate-300/85">Informations pour conserver un bon suivi vétérinaire et préventif.</p>
+                    </div>
 
-                    <h3 className="font-medium text-[1.1rem] text-[#b8e3c8]">Fréquence visite vétérinaire</h3>
-                    <p className="text-center text-slate-300 font-thin mt-4 mb-8">{health.vetCheckFrequency}</p>
+                    <div className="grid gap-3 p-4 sm:grid-cols-2 sm:p-5">
+                        <article className="rounded-2xl border border-emerald-300/15 bg-gradient-to-br from-emerald-500/10 to-teal-500/5 p-4">
+                            <h5 className="text-[0.78rem] font-semibold uppercase tracking-[0.18em] text-emerald-200/70">Vermifuge</h5>
+                            <p className="mt-3 text-sm leading-relaxed text-slate-100">{health.dewormingFrequency}</p>
+                        </article>
 
-                    <h3 className="font-medium text-[1.1rem] text-[#b8e3c8]">Conseils</h3>
-                    <p className="text-justify text-slate-300 font-thin mt-4 mb-8 mr-4 ml-4">{health.generalAdvice}</p>
+                        <article className="rounded-2xl border border-emerald-300/15 bg-gradient-to-br from-emerald-500/10 to-teal-500/5 p-4">
+                            <h5 className="text-[0.78rem] font-semibold uppercase tracking-[0.18em] text-emerald-200/70">Contrôle</h5>
+                            <p className="mt-3 text-sm leading-relaxed text-slate-100">{health.vetCheckFrequency}</p>
+                        </article>
+
+                        <article className="rounded-2xl border border-emerald-300/15 bg-gradient-to-br from-slate-800/90 to-slate-900/90 p-4 sm:col-span-2">
+                            <h5 className="text-[0.78rem] font-semibold uppercase tracking-[0.18em] text-emerald-200/70">Conseil</h5>
+                            <p className="mt-3 text-sm leading-relaxed text-slate-100/95">{health.generalAdvice}</p>
+                        </article>
+                    </div>
                 </div>
             )}
         </div>
