@@ -20,8 +20,8 @@ export default function Health() {
     }, [searchParams]);
 
     return (
-        <section> 
-            <h2 className="flex items-center justify-center gap-3 text-center text-3xl font-bold text-[#8fd3a9] my-8">
+        <section className="pb-20 text-slate-300"> 
+            <h2 className="my-8 flex items-center justify-center gap-3 text-center text-3xl font-bold text-[#8fd3a9]">
                 <img src={healthSectionLogo} alt="Icône santé" className="h-12 w-12" />
                 Santé
             </h2>
