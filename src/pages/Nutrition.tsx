@@ -26,12 +26,6 @@ export default function Nutrition() {
                 Nutrition
             </h2>
 
-            {selectedAnimalId === 0 && (
-                <p className="text-center text-slate-300 font-thin mt-4 mb-8">
-                    Veuillez sélectionner un type d'animal pour voir les recommandations de nutrition.
-                </p>
-            )}
-
             {/* Affichage des types de nutrition avantages / inconvénients */}
             <FoodTypeInfo selectedAnimalId={selectedAnimalId} />
 
