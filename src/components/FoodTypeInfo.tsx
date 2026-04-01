@@ -19,10 +19,6 @@ export default function FoodTypeInfo({ selectedAnimalId }: FoodTypeInfoProps) {
     return (
         <div>
             {/* Affichage des types de nutrition pour l'animal sélectionné */}
-            {selectedAnimalId > 0 && (
-                <h3 className="m-4 flex items-center justify-center gap-3 text-center font-black text-[1.3rem] text-[#ca814e]">Types de nutrition</h3>
-            )}
-
             {selectedAnimalId > 0 && isLoadingFoodTypes && <p className="text-center font-thin mt-4 mb-8">Chargement des types de nutrition...</p>}
             
             {selectedAnimalId > 0 && isErrorFoodTypes && <p className="text-center text-red-400 mt-4 mb-8">Erreur types de nutrition: {(foodTypesError as Error).message}</p>}
