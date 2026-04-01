@@ -14,21 +14,21 @@ export default function Advantage({ selectedFoodTypeId }: AdvantageProps) {
     } = useAdvantages(selectedFoodTypeId);
 
     return (
-        <div>
-            {isLoadingAdvantages && <p className="text-center text-slate-300 font-thin mt-4 mb-8">Chargement des avantages...</p>}
+        <div className="min-w-0">
+            {isLoadingAdvantages && <p className="mt-2 text-sm text-emerald-100/80">Chargement des avantages...</p>}
                                 
-            {isErrorAdvantages && <p className="text-center text-red-400 mt-4 mb-8">Erreur avantages: {(advantagesError as Error).message}</p>}
+            {isErrorAdvantages && <p className="mt-2 text-sm text-rose-300">Erreur avantages: {(advantagesError as Error).message}</p>}
                                 
             {advantages && advantages.length === 0 && (
-                <p className="text-center text-slate-300 font-thin mt-4 mb-8">Aucun avantage trouvé pour ce type de nutrition.</p>
+                <p className="mt-2 text-sm text-emerald-100/70">Aucun avantage trouvé pour ce type de nutrition.</p>
             )}
 
             {advantages && advantages.length > 0 && (
-                <ul className="pr-4">
+                <ul className="space-y-2">
                     {advantages.map((advantage) => (
-                        <li key={advantage.label} className="mb-2 flex items-center gap-2">
-                            <span className="inline-block h-[0.3rem] w-[0.3rem] rounded-full bg-gray-400 flex-shrink-0" />
-                            {advantage.label}
+                        <li key={advantage.label} className="flex items-start gap-2 text-[0.95rem] text-slate-100">
+                            <span className="mt-[0.45rem] inline-block h-[0.35rem] w-[0.35rem] rounded-full bg-emerald-300 flex-shrink-0" />
+                            <span className="leading-snug">{advantage.label}</span>
                         </li>
                     ))}
                 </ul>
