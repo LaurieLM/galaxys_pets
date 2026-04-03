@@ -7,7 +7,8 @@ type ShelterResponse = {
     adress: string,
     phone: string,
     website: string,
-    description: string;
+    description: string,
+    image_url: string;
 }
 
 export default async function getShelters(): Promise<ShelterResponse[]> {
