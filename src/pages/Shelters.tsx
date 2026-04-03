@@ -1,7 +1,11 @@
 import CityFilter from "../components/CityFilter";
+import ShelterCard from "../components/ShelterCard";
 
 export default function Shelters() {
     return (
-        <CityFilter />
+        <section>
+            <CityFilter />
+            <ShelterCard />
+        </section>
     )
 }
