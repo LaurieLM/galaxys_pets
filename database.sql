@@ -30,14 +30,6 @@ CREATE TABLE refuges (
 DEFAULT CHARSET=utf8mb4
 COLLATE=utf8mb4_unicode_ci;
 
-CREATE TABLE cities (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    city VARCHAR(50) NOT NULL UNIQUE,
-    country VARCHAR(50) NOT NULL
-) ENGINE=InnoDB
-DEFAULT CHARSET=utf8mb4
-COLLATE=utf8mb4_unicode_ci;
-
 CREATE TABLE users (
     id INT AUTO_INCREMENT PRIMARY KEY,
     email VARCHAR(100) NOT NULL UNIQUE,
@@ -527,20 +519,6 @@ INSERT INTO refuges (name, city, adress, phone, website, description) VALUES
 ('Croc Blanc', 'Lyon', null, null, 'https://www.crocblanc.org/', 'Le refuge Croc Blanc à Lyon accueille et prend soin des animaux abandonnés, maltraités ou perdus. Nous offrons un foyer temporaire chaleureux et aimant à nos pensionnaires, en leur fournissant nourriture, soins vétérinaires et beaucoup d''affection. Notre équipe dévouée travaille sans relâche pour trouver des familles aimantes qui offriront à nos animaux une seconde chance de bonheur. En adoptant chez Croc Blanc, vous contribuez à sauver des vies et à offrir un avenir meilleur à nos amis à quatre pattes.'),
 ('SPA - Refuge de Marennes', 'Marennes', '660 chemin de Chantemerle, 69970 Marennes', '0472704636', 'https://www.la-spa.fr/etablissement/refuge-spa-de-marennes-lyon/', 'L''équipe du refuge de Marennes est à votre disposition toute l''année pour vous accompagner dans votre projet d''adoption. Le refuge porte secours à de nombreux chiens, chats, mais aussi quelques NAC (Nouveaux Animaux de Compagnie). Entre 2018 et 2020, ce sont près de 4 200 animaux qui ont été recueillis. Installé à seulement 30 minutes de Lyon.'),
 ('Ron''Rhône', 'Lyon', null, null, 'https://www.association-ronrhone.fr/', 'Notre mission première est de promouvoir la bienveillance envers tous les animaux, en sensibilisant le public et en agissant concrètement sur le terrain. Grâce aux nombreuses familles d''accueil, bénévoles, adhérents et parrains, nos petits pensionnaires obtiennent une deuxième chance et peuvent trouver leur foyer pour la vie.');
-
-INSERT INTO cities (city, country) VALUES
-('Lyon', 'France'),
-('Marseille', 'France'),
-('Paris', 'France'),
-('Nantes', 'France'),
-('Lille', 'France'),
-('Nice', 'France'),
-('Toulouse', 'France'),
-('Tours', 'France'),
-('Montpellier', 'France'),
-('Bordeaux', 'France'),
-('Strasbourg', 'France'),
-('Aix-en-Provence', 'France');
 
 INSERT INTO refuge_animals (refuge_id, animal_id) VALUES
 (1,1),
