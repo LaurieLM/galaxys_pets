@@ -1,6 +1,10 @@
 import useShelter from "../hooks/useShelter";
 
-export default function ShelterCard() {
+type ShelterCardProps = {
+    selectedCity: string;
+}
+
+export default function ShelterCard({ selectedCity }: ShelterCardProps) {
     const { 
         data: shelters,
         isLoading: isLoadingShelters,
@@ -8,19 +12,30 @@ export default function ShelterCard() {
         error: sheltersError,
     } = useShelter();
 
+    const normalizeCity = (value: string) =>
+        value
+            .normalize('NFD')
+            .replace(/[\u0300-\u036f]/g, '')
+            .trim()
+            .toLowerCase();
+
+    const filteredShelters = shelters?.filter((shelter) =>
+        selectedCity ? normalizeCity(shelter.city) === normalizeCity(selectedCity) : true
+    );
+
     return (
         <div>
             {isLoadingShelters && <p className="text-center font-thin mt-4 mb-8">Chargement des refuges...</p>}
 
             {isErrorShelters && <p className="text-center text-red-400 mt-4 mb-8">Erreur refuges: {(sheltersError as Error).message}</p>}
 
-            {shelters && shelters.length === 0 && (
+            {filteredShelters && filteredShelters.length === 0 && (
                 <p className="text-center font-thin mt-4 mb-8">Aucun refuge trouvé.</p>
             )}
 
-            {shelters && shelters.length > 0 && (
+            {filteredShelters && filteredShelters.length > 0 && (
                 <ul className="flex flex-wrap justify-center items-center mx-4 my-8">
-                    {shelters.map((shelter) => (
+                    {filteredShelters.map((shelter) => (
                         <li key={shelter.id} className="m-2 p-4 border rounded-lg shadow-md">
                             <h3 className="text-lg font-semibold">{shelter.name}</h3>
                             <p className="text-sm text-gray-600">{shelter.city}</p>
