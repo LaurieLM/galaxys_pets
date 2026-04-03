@@ -17,6 +17,7 @@ export default async function getCityOptions(cityName: string): Promise<CityOpti
         throw new Error("Failed to fetch advantages");
     }
     const data: CityApiResult[] = await res.json();
+
     return data.map((city) => ({
         value: city.code,
         label: city.departement ? `${city.nom} (${city.departement.nom})` : city.nom,
