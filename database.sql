@@ -25,7 +25,7 @@ CREATE TABLE refuges (
     phone VARCHAR(50),
     website VARCHAR(255),
     description TEXT,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    image_url VARCHAR(255)
 ) ENGINE=InnoDB
 DEFAULT CHARSET=utf8mb4
 COLLATE=utf8mb4_unicode_ci;
@@ -515,10 +515,10 @@ INSERT INTO health_infos (animal_id, deworming_frequency, vet_check_frequency, g
 (5, 'Tous les 3 mois', 'Une fois par an', 'Brossez régulièrement votre hamster pour éviter les nœuds et les problèmes de peau. Assurez-vous qu''il ait accès à de l''eau fraîche en permanence. Donnez-lui une alimentation équilibrée adaptée à son âge, sa taille et son niveau d''activité.');
 
 // REFUGES
-INSERT INTO refuges (name, city, adress, phone, website, description) VALUES
-('Croc Blanc', 'Lyon', null, null, 'https://www.crocblanc.org/', 'Le refuge Croc Blanc à Lyon accueille et prend soin des animaux abandonnés, maltraités ou perdus.'),
-('SPA - Refuge de Marennes', 'Marennes', '660 chemin de Chantemerle, 69970 Marennes', '0472704636', 'https://www.la-spa.fr/etablissement/refuge-spa-de-marennes-lyon/', 'Le refuge porte secours à de nombreux chiens, chats, mais aussi quelques NAC (Nouveaux Animaux de Compagnie). '),
-('Ron''Rhône', 'Lyon', null, null, 'https://www.association-ronrhone.fr/', 'Notre mission première est de promouvoir la bienveillance envers tous les animaux, en sensibilisant le public et en agissant concrètement sur le terrain.');
+INSERT INTO refuges (name, city, adress, phone, website, description, image_url) VALUES
+('Croc Blanc', 'Lyon', null, null, 'https://www.crocblanc.org/', 'Le refuge Croc Blanc à Lyon accueille et prend soin des animaux abandonnés, maltraités ou perdus.', 'public/shelters/croc_blanc.jpg'),
+('SPA - Refuge de Marennes', 'Marennes', '660 chemin de Chantemerle, 69970 Marennes', '0472704636', 'https://www.la-spa.fr/etablissement/refuge-spa-de-marennes-lyon/', 'Le refuge porte secours à de nombreux chiens, chats, mais aussi quelques NAC (Nouveaux Animaux de Compagnie). ', 'public/shelters/spa_marennes.jpg'),
+('Ron''Rhône', 'Lyon', null, null, 'https://www.association-ronrhone.fr/', 'Notre mission première est de promouvoir la bienveillance envers tous les animaux, en sensibilisant le public et en agissant concrètement sur le terrain.', 'public/shelters/ron_rhone.jpg');
 
 INSERT INTO refuge_animals (refuge_id, animal_id) VALUES
 (1,1),
