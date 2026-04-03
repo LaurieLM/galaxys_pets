@@ -21,7 +21,7 @@ export default function GeneralInfo({ selectedAnimalId }: GeneralInfoProps) {
             )}
 
             {selectedAnimalId > 0 && health && (
-                <div className="mx-4 rounded-2xl border border-emerald-400/25 bg-slate-900/40 shadow-[0_8px_24px_rgba(0,0,0,0.18)]">
+                <div className="mx-4 overflow-hidden rounded-2xl border border-emerald-400/25 bg-slate-900/40 shadow-[0_8px_24px_rgba(0,0,0,0.18)]">
                     <div className="border-b border-emerald-300/15 bg-gradient-to-r from-emerald-500/15 via-teal-500/10 to-slate-900/0 px-5 py-4">
                         <p className="text-[0.78rem] font-semibold uppercase tracking-[0.22em] text-emerald-200/70">Suivi santé</p>
                         <h4 className="mt-1 text-[1.05rem] font-semibold text-emerald-100">Recommandations générales</h4>
