@@ -4,7 +4,7 @@ type ShelterResponse = {
     id: number,
     name: string,
     city: string,
-    adress: string,
+    address: string,
     phone: string,
     website: string,
     description: string,

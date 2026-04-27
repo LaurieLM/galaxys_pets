@@ -60,8 +60,8 @@ export default function ShelterCard({ selectedCity }: ShelterCardProps) {
                                             <img src={cityLogo} alt="Icône adresse" className="mt-0.5 h-4 w-4 shrink-0" />
                                             <span>{shelter.city}</span>
                                         </p>
-                                        {shelter.adress && (
-                                            <p className="text-sm text-slate-200 pl-6">{shelter.adress}</p>
+                                        {shelter.address && (
+                                            <p className="text-sm text-slate-200 pl-6">{shelter.address}</p>
                                         )}
                                         {shelter.phone && (
                                             <p className="inline-flex items-start gap-2 text-sm text-slate-200">
