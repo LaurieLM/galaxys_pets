@@ -25,7 +25,7 @@ CREATE TABLE refuges (
     phone VARCHAR(50),
     website VARCHAR(255),
     description TEXT,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    image_url VARCHAR(255)
 ) ENGINE=InnoDB
 DEFAULT CHARSET=utf8mb4
 COLLATE=utf8mb4_unicode_ci;
@@ -515,10 +515,10 @@ INSERT INTO health_infos (animal_id, deworming_frequency, vet_check_frequency, g
 (5, 'Tous les 3 mois', 'Une fois par an', 'Brossez régulièrement votre hamster pour éviter les nœuds et les problèmes de peau. Assurez-vous qu''il ait accès à de l''eau fraîche en permanence. Donnez-lui une alimentation équilibrée adaptée à son âge, sa taille et son niveau d''activité.');
 
 // REFUGES
-INSERT INTO refuges (name, city, adress, phone, website, description) VALUES
-('Croc Blanc', 'Lyon', null, null, 'https://www.crocblanc.org/', 'Le refuge Croc Blanc à Lyon accueille et prend soin des animaux abandonnés, maltraités ou perdus. Nous offrons un foyer temporaire chaleureux et aimant à nos pensionnaires, en leur fournissant nourriture, soins vétérinaires et beaucoup d''affection. Notre équipe dévouée travaille sans relâche pour trouver des familles aimantes qui offriront à nos animaux une seconde chance de bonheur. En adoptant chez Croc Blanc, vous contribuez à sauver des vies et à offrir un avenir meilleur à nos amis à quatre pattes.'),
-('SPA - Refuge de Marennes', 'Marennes', '660 chemin de Chantemerle, 69970 Marennes', '0472704636', 'https://www.la-spa.fr/etablissement/refuge-spa-de-marennes-lyon/', 'L''équipe du refuge de Marennes est à votre disposition toute l''année pour vous accompagner dans votre projet d''adoption. Le refuge porte secours à de nombreux chiens, chats, mais aussi quelques NAC (Nouveaux Animaux de Compagnie). Entre 2018 et 2020, ce sont près de 4 200 animaux qui ont été recueillis. Installé à seulement 30 minutes de Lyon.'),
-('Ron''Rhône', 'Lyon', null, null, 'https://www.association-ronrhone.fr/', 'Notre mission première est de promouvoir la bienveillance envers tous les animaux, en sensibilisant le public et en agissant concrètement sur le terrain. Grâce aux nombreuses familles d''accueil, bénévoles, adhérents et parrains, nos petits pensionnaires obtiennent une deuxième chance et peuvent trouver leur foyer pour la vie.');
+INSERT INTO refuges (name, city, adress, phone, website, description, image_url) VALUES
+('Croc Blanc', 'Lyon', null, null, 'https://www.crocblanc.org/', 'Le refuge Croc Blanc à Lyon accueille et prend soin des animaux abandonnés, maltraités ou perdus.', 'public/shelters/croc_blanc.jpg'),
+('SPA - Refuge de Marennes', 'Marennes', '660 chemin de Chantemerle, 69970 Marennes', '0472704636', 'https://www.la-spa.fr/etablissement/refuge-spa-de-marennes-lyon/', 'Le refuge porte secours à de nombreux chiens, chats, mais aussi quelques NAC (Nouveaux Animaux de Compagnie). ', 'public/shelters/spa_marennes.jpg'),
+('Ron''Rhône', 'Lyon', null, null, 'https://www.association-ronrhone.fr/', 'Notre mission première est de promouvoir la bienveillance envers tous les animaux, en sensibilisant le public et en agissant concrètement sur le terrain.', 'public/shelters/ron_rhone.jpg');
 
 INSERT INTO refuge_animals (refuge_id, animal_id) VALUES
 (1,1),
@@ -531,3 +531,5 @@ INSERT INTO refuge_animals (refuge_id, animal_id) VALUES
 (2,5),
 (3,1),
 (3,2);
+
+L'équipe du refuge de Marennes est à votre disposition toute l'année pour vous accompagner dans votre projet d'adoption. Le refuge porte secours à de nombreux chiens, chats, mais aussi quelques NAC (Nouveaux Animaux de Compagnie). 

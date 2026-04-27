@@ -6,6 +6,10 @@ type CityOption = {
     label: string;
 };
 
+type CityFilterProps = {
+    onChange: (city: string) => void;
+}
+
 // Variable pour stocker le timer de debounce
 let debounceTimer: ReturnType<typeof setTimeout>;
 
@@ -20,7 +24,7 @@ const loadOptions = (inputValue: string): Promise<CityOption[]> => {
     });
 };
 
-export default function CityFilter() {
+export default function CityFilter({ onChange }: CityFilterProps) {
     return (
         <AsyncSelect
             loadOptions={loadOptions}
