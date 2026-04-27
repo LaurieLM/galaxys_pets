@@ -25,6 +25,10 @@ export default function CityFilter() {
         <AsyncSelect
             loadOptions={loadOptions}
             placeholder="Rechercher une ville..."
+            loadingMessage={() => 'Chargement...'}
+            noOptionsMessage={({ inputValue }) =>
+                inputValue ? 'Aucune ville trouvée' : 'Veuillez taper une ville'
+            }
             unstyled
             className='w-[70%] justify-self-center m-12'
             classNames={{
