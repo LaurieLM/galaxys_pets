@@ -517,8 +517,10 @@ INSERT INTO health_infos (animal_id, deworming_frequency, vet_check_frequency, g
 -- SHELTERS
 INSERT INTO shelters (name, city, address, phone, website, description, image_url) VALUES
 ('Croc Blanc', 'Lyon', null, null, 'https://www.crocblanc.org/', 'Le refuge Croc Blanc à Lyon accueille et prend soin des animaux abandonnés, maltraités ou perdus.', 'public/shelters/croc_blanc.jpg'),
-('SPA - Refuge de Marennes', 'Marennes', '660 chemin de Chantemerle, 69970 Marennes', '0472704636', 'https://www.la-spa.fr/etablissement/refuge-spa-de-marennes-lyon/', 'Le refuge porte secours à de nombreux chiens, chats, mais aussi quelques NAC (Nouveaux Animaux de Compagnie). ', 'public/shelters/spa_marennes.jpg'),
-('Ron''Rhône', 'Lyon', null, null, 'https://www.association-ronrhone.fr/', 'Notre mission première est de promouvoir la bienveillance envers tous les animaux, en sensibilisant le public et en agissant concrètement sur le terrain.', 'public/shelters/ron_rhone.jpg');
+('SPA - Refuge de Marennes', 'Marennes', '660 chemin de Chantemerle, 69970 Marennes', '0472704636', 'https://www.la-spa.fr/etablissement/refuge-spa-de-marennes-lyon/', 'Le refuge porte secours à de nombreux chiens, chats, mais aussi quelques NAC (Nouveaux Animaux de Compagnie). ', 'public/shelters/spa.jpg'),
+('Ron''Rhône', 'Lyon', null, null, 'https://www.association-ronrhone.fr/', 'Notre mission première est de promouvoir la bienveillance envers tous les animaux, en sensibilisant le public et en agissant concrètement sur le terrain.', 'public/shelters/ron_rhone.jpg'),
+('SPA - Refuge de l''Angoumois', 'Mornac', 'Route de Bois Long, 16600 Mornac', '0545657699', 'https://refugedelangoumois.fr/', 'Le refuge de l''Angoumois accueille des chiens et des chats en détresse, leur offrant un refuge sûr et des soins attentionnés.', 'public/shelters/spa.jpg'),
+('Agir Pour Les Animaux', 'Castelginest', '13 Chemin du Loup', '0612165957', 'https://agir-pourlesanimaux.com/', 'Agir Pour Les Animaux est une association de protection animale qui recueille et prend soin des animaux abandonnés, maltraités ou perdus.', 'public/shelters/agir_pour_les_animaux.png');
 
 INSERT INTO shelter_animals (shelter_id, animal_id) VALUES
 (1,1),
@@ -530,4 +532,10 @@ INSERT INTO shelter_animals (shelter_id, animal_id) VALUES
 (2,4),
 (2,5),
 (3,1),
-(3,2);
+(3,2),
+(4,1),
+(4,2),
+(5,1),
+(5,2),
+(5,4),
+(5,5);
