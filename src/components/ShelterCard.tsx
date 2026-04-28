@@ -53,9 +53,10 @@ export default function ShelterCard({ selectedCity }: ShelterCardProps) {
 
                                 <p className="text-sm leading-relaxed text-slate-200">{shelter.description}</p>
 
+                                {/* Section Informations */}
                                 <div className="mt-auto rounded-xl border border-slate-600/70 bg-slate-900/45 p-4">
                                     <p className="text-xs uppercase tracking-[0.18em] text-slate-400">Informations</p>
-                                    <div className="mt-3 space-y-2">
+                                    <div className="mt-3">
                                         <p className="inline-flex items-start gap-2 text-sm text-slate-100">
                                             <img src={cityLogo} alt="Icône adresse" className="mt-0.5 h-4 w-4 shrink-0" />
                                             <span>{shelter.city}</span>
@@ -69,6 +70,24 @@ export default function ShelterCard({ selectedCity }: ShelterCardProps) {
                                                 <span>{shelter.phone}</span>
                                             </p>
                                         )}
+
+                                        {/* Section Types d'animaux */}
+                                        <div className="pt-2">
+                                            <p className="mb-2 text-xs uppercase tracking-[0.18em] text-slate-400">Types d'animaux</p>
+                                            {shelter.animal_types && shelter.animal_types.length > 0 ? (
+                                                <div className="flex flex-wrap gap-2">
+                                                    {shelter.animal_types.map((animalType: string) => (
+                                                        <span key={`${shelter.id}-${animalType}`} className="rounded-full border border-emerald-300/40 bg-emerald-400/10 px-2.5 py-1 text-xs text-emerald-200">
+                                                            {animalType}
+                                                        </span>
+                                                    ))}
+                                                </div>
+                                            ) : (
+                                                <p className="text-xs text-slate-400">Aucun type renseigné</p>
+                                            )}
+                                        </div>
+
+                                        {/* Section Site web */}
                                         {shelter.website && (
                                             <div className="mt-4">
                                                 <a
@@ -87,8 +106,6 @@ export default function ShelterCard({ selectedCity }: ShelterCardProps) {
                                 </div>
                             </div>
                         </li>
-                            
-                            
                     ))}
                 </ul>
             )}
