@@ -17,11 +17,11 @@ CREATE TABLE food_types (
 DEFAULT CHARSET=utf8mb4
 COLLATE=utf8mb4_unicode_ci;
 
-CREATE TABLE refuges (
+CREATE TABLE shelters (
     id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(100) NOT NULL,
     city VARCHAR(25) NOT NULL,
-    adress VARCHAR(100),
+    address VARCHAR(100),
     phone VARCHAR(50),
     website VARCHAR(255),
     description TEXT,
@@ -111,11 +111,11 @@ CREATE TABLE animal_common_diseases (
 DEFAULT CHARSET=utf8mb4
 COLLATE=utf8mb4_unicode_ci;
 
-CREATE TABLE refuge_animals (
-    refuge_id INT NOT NULL,
+CREATE TABLE shelter_animals (
+    shelter_id INT NOT NULL,
     animal_id INT NOT NULL,
-    PRIMARY KEY (refuge_id, animal_id),
-    FOREIGN KEY (refuge_id) REFERENCES refuges(id) ON DELETE CASCADE,
+    PRIMARY KEY (shelter_id, animal_id),
+    FOREIGN KEY (shelter_id) REFERENCES shelters(id) ON DELETE CASCADE,
     FOREIGN KEY (animal_id) REFERENCES animals(id) ON DELETE CASCADE
 ) ENGINE=InnoDB
 DEFAULT CHARSET=utf8mb4
@@ -168,9 +168,9 @@ CREATE TABLE food_type_disadvantages (
 DEFAULT CHARSET=utf8mb4
 COLLATE=utf8mb4_unicode_ci;
 
-// INSERTION DES DONNEES
+-- DATA INSERTS
 
-// TYPE ANIMAUX
+-- ANIMAL TYPES
 INSERT INTO animals (type, image_url) VALUES
 ('Chien', 'public/animals/dog.jpg'),
 ('Chat', 'public/animals/cat.jpg'),
@@ -178,7 +178,7 @@ INSERT INTO animals (type, image_url) VALUES
 ('Lapin', 'public/animals/rabbit.jpg'),
 ('Hamster', 'public/animals/hamster.jpg');
 
-// ALIMENTATION
+-- NUTRITION
 INSERT INTO food_types (name, description) VALUES
 ('Croquettes', 'Les croquettes sont complète et équilibrée mais attention à la composition ! En fonction de la marque la qualité des ingrédients diffère et peut contenir des additifs ainsi que des céréales qui ne sont pas toujours bonne pour votre animal. Elles sont majoritairement industrielle mais de plus en plus de marques artisanales apparaissent. Il existe beaucoup de variantes en fonction de l''âge, de la race et des problèmes de santé mais aussi différentes quantité. C''est une alimentation sèche et donc peu hydratante, attention à ce que votre animal boive bien. '),
 ('Pâtée', 'La pâtée est très appétente, et plus facile à mâcher pour les animaux âgés.  Cependant attention à l''hygiène dentaire, car elle n''est pas très bonne pour les dents. La qualité de sa composition varie également en fonction des marques. Comme c''est une alimentation humide elle offre une bonne hydratation.'),
@@ -434,7 +434,7 @@ INSERT INTO animal_dangerous_foods (animal_id, dangerous_food_id) VALUES
 (5,28),
 (5,29);
 
-// SANTE
+-- HEALTH
 INSERT INTO vaccines (name, description, first_dose, reminders) VALUES
 ('CHPPi/L', 'Protège contre la maladie de Carré, l''hépatite de Rubarth, la parvovirose, la parainfluenza et la leptospirose.', 'A partir de 8 semaines', 'Rappel après 1 mois, puis tous les ans'),
 ('Rage', 'Protège contre la rage, une maladie virale mortelle qui affecte le système nerveux central. Obligatoire pour les voyages à l''étranger', 'A partir de 12 semaines', 'Rappel tous les 3 ans'),
@@ -514,13 +514,15 @@ INSERT INTO health_infos (animal_id, deworming_frequency, vet_check_frequency, g
 (4, 'Tous les 3 mois', 'Une fois par an', 'Brossez régulièrement votre lapin pour éviter les nœuds et les problèmes de peau. Assurez-vous qu''il ait accès à de l''eau fraîche en permanence. Donnez-lui une alimentation équilibrée adaptée à son âge, sa taille et son niveau d''activité.'),
 (5, 'Tous les 3 mois', 'Une fois par an', 'Brossez régulièrement votre hamster pour éviter les nœuds et les problèmes de peau. Assurez-vous qu''il ait accès à de l''eau fraîche en permanence. Donnez-lui une alimentation équilibrée adaptée à son âge, sa taille et son niveau d''activité.');
 
-// REFUGES
-INSERT INTO refuges (name, city, adress, phone, website, description, image_url) VALUES
+-- SHELTERS
+INSERT INTO shelters (name, city, address, phone, website, description, image_url) VALUES
 ('Croc Blanc', 'Lyon', null, null, 'https://www.crocblanc.org/', 'Le refuge Croc Blanc à Lyon accueille et prend soin des animaux abandonnés, maltraités ou perdus.', 'public/shelters/croc_blanc.jpg'),
-('SPA - Refuge de Marennes', 'Marennes', '660 chemin de Chantemerle, 69970 Marennes', '0472704636', 'https://www.la-spa.fr/etablissement/refuge-spa-de-marennes-lyon/', 'Le refuge porte secours à de nombreux chiens, chats, mais aussi quelques NAC (Nouveaux Animaux de Compagnie). ', 'public/shelters/spa_marennes.jpg'),
-('Ron''Rhône', 'Lyon', null, null, 'https://www.association-ronrhone.fr/', 'Notre mission première est de promouvoir la bienveillance envers tous les animaux, en sensibilisant le public et en agissant concrètement sur le terrain.', 'public/shelters/ron_rhone.jpg');
+('SPA - Refuge de Marennes', 'Marennes', '660 chemin de Chantemerle, 69970 Marennes', '0472704636', 'https://www.la-spa.fr/etablissement/refuge-spa-de-marennes-lyon/', 'Le refuge porte secours à de nombreux chiens, chats, mais aussi quelques NAC (Nouveaux Animaux de Compagnie). ', 'public/shelters/spa.jpg'),
+('Ron''Rhône', 'Lyon', null, null, 'https://www.association-ronrhone.fr/', 'Notre mission première est de promouvoir la bienveillance envers tous les animaux, en sensibilisant le public et en agissant concrètement sur le terrain.', 'public/shelters/ron_rhone.jpg'),
+('SPA - Refuge de l''Angoumois', 'Mornac', 'Route de Bois Long, 16600 Mornac', '0545657699', 'https://refugedelangoumois.fr/', 'Le refuge de l''Angoumois accueille des chiens et des chats en détresse, leur offrant un refuge sûr et des soins attentionnés.', 'public/shelters/spa.jpg'),
+('Agir Pour Les Animaux', 'Castelginest', '13 Chemin du Loup', '0612165957', 'https://agir-pourlesanimaux.com/', 'Agir Pour Les Animaux est une association de protection animale qui recueille et prend soin des animaux abandonnés, maltraités ou perdus.', 'public/shelters/agir_pour_les_animaux.png');
 
-INSERT INTO refuge_animals (refuge_id, animal_id) VALUES
+INSERT INTO shelter_animals (shelter_id, animal_id) VALUES
 (1,1),
 (1,2),
 (1,5),
@@ -530,6 +532,10 @@ INSERT INTO refuge_animals (refuge_id, animal_id) VALUES
 (2,4),
 (2,5),
 (3,1),
-(3,2);
-
-L'équipe du refuge de Marennes est à votre disposition toute l'année pour vous accompagner dans votre projet d'adoption. Le refuge porte secours à de nombreux chiens, chats, mais aussi quelques NAC (Nouveaux Animaux de Compagnie). 
+(3,2),
+(4,1),
+(4,2),
+(5,1),
+(5,2),
+(5,4),
+(5,5);

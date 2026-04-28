@@ -1,4 +1,5 @@
 import AsyncSelect from 'react-select/async';
+import type { SingleValue } from 'react-select';
 import getCityOptions from '../api/geoFilter';
 
 type CityOption = {
@@ -26,8 +27,9 @@ const loadOptions = (inputValue: string): Promise<CityOption[]> => {
 
 export default function CityFilter({ onChange }: CityFilterProps) {
     return (
-        <AsyncSelect
+        <AsyncSelect<CityOption, false>
             loadOptions={loadOptions}
+            onChange={(selectedOption: SingleValue<CityOption>) => onChange(selectedOption?.value ?? '')}
             placeholder="Rechercher une ville..."
             loadingMessage={() => 'Chargement...'}
             noOptionsMessage={({ inputValue }) =>
