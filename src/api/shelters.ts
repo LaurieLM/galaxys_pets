@@ -1,15 +1,16 @@
 import { API_URL } from "../config";
 
 type ShelterResponse = {
-    id: number,
-    name: string,
-    city: string,
-    adress: string,
-    phone: string,
-    website: string,
-    description: string,
-    image_url: string;
-}
+    id: number;
+    name: string;
+    city: string;
+    address?: string | null;
+    phone?: string | null;
+    website?: string | null;
+    description?: string | null;
+    image_url: string,
+    animal_types: string[];
+};
 
 export default async function getShelters(): Promise<ShelterResponse[]> {
     const res = await fetch(`${API_URL}/shelters`);
